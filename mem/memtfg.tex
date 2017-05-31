@@ -1,4 +1,4 @@
-\documentclass[spanish,a4paper,11pt,oneside]{extreport}
+\documentclass[spanish,a4paper,14pt,oneside]{extreport}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[dvips]{graphicx}
@@ -8,6 +8,7 @@
 \usepackage{alltt}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage[algo2e]{algorithm2e}
 \usepackage{multirow}
 \usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -108,9 +109,9 @@
 
 \HRule
 \begin{flushright}
-        {\Huge Título} \\[2.5mm]
-        {\Large \textit{Title in English} .} \\[5mm]
-        {\Large Autor} \\[5mm]
+        {\Huge Desarrollo Dirigido por Retos} \\[2.5mm]
+        {\Large \textit{Challenge-driven development}.} \\[5mm]
+        {\Large Alejandro Marrero Díaz} \\[5mm]
 
 
 \end{flushright}
@@ -129,7 +130,7 @@
 %\cleardoublepage
 \thispagestyle{empty}
 
-D. {\bf Nombre Apellido1 Apellido2}, con N.I.F. 12.345.678-X
+D. {\bf Eduardo Manuel Segredo González}, con N.I.F. 78.564.242-Z
 profesor
 Titular de Universidad
 adscrito al Departamento
@@ -137,7 +138,7 @@ de Nombre del Departamento
 de la Universidad de La Laguna, como tutor
 
 \bigskip
-D. {\bf Nombre Apellido1 Apellido2}, con N.I.F. 12.345.678-X
+D. {\bf Carlos Segura González}, con N.I.F. 78.704.244-S
 profesor
 Titular de Universidad
 adscrito al Departamento
@@ -154,14 +155,14 @@ de la Universidad de La Laguna, como cotutor
 Que la presente memoria titulada:
 
 \bigskip
-``{\it Título del Trabajo.}''
+``{\it Desarrollo Dirigido por Retos.}''
 
 \bigskip
 \bigskip
 \bigskip
 
-\noindent ha sido realizada bajo su dirección por D. {\bf Nombre Apellido1 Apellido2},
-con N.I.F. 12.345.678-X.
+\noindent ha sido realizada bajo su dirección por D. {\bf Alejandro Marrero Díaz},
+con N.I.F. 78.649.404-F.
 
 \bigskip
 \bigskip
@@ -186,19 +187,24 @@ Agradecimientos
 
 
 \hspace{3mm}
-XXX
+A mi familia y amigos que
 
 \hspace{3mm}
-XXX
+me han apoyado incondicionalmente estos 4 años.
 
-
-\hspace{3mm}
-XXX
-
+\bigskip
 
 \hspace{3mm}
-XXX
+Agradecer también a los directores de este proyecto,
 
+\hspace{3mm}
+Eduardo Segredo y Carlos Segura,
+
+\hspace{3mm}
+por la ayuda en el desarrollo de este proyecto
+
+\hspace{3mm}
+y por adentrarme en el mundo de la investigación.
 
 \end{large}
 
@@ -210,71 +216,9 @@ XXX
 \begin{huge}
 Licencia
 \end{huge}
-
-\bigskip
-* Si NO quiere permitir que se compartan las adaptaciones de tu obra
-y NO quieres permitir usos comerciales de tu obra indica:
-
-\begin{center}
-\includegraphics[scale=1.5]{images/by-nc-nd_88x31}\\[10mm]
-{\Large \copyright~Esta obra está bajo una licencia de Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional.
-}
-\end{center}
-
-
-\bigskip
-* Si quiere permitir que se compartan las adaptaciones de tu obra mientras se comparta de la misma manera
-y NO quieres permitir usos comerciales de tu obra indica:
-
 \begin{center}
 \includegraphics[scale=1.5]{images/by-nc-sa_88x31}\\[10mm]
 {\Large \copyright~Esta obra está bajo una licencia de Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional.
-}
-\end{center}
-
-
-
-\bigskip
-* Si quiere permitir que se compartan las adaptaciones de tu obra
-y NO quieres permitir usos comerciales de tu obra indica:
-
-\begin{center}
-\includegraphics[scale=1.5]{images/by-nc_88x31}\\[10mm]
-{\Large \copyright~Esta obra está bajo una licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional.
-}
-\end{center}
-
-\newpage
-
-\bigskip
-*Si NO quiere permitir que se compartan las adaptaciones de tu obra
-y quieres permitir usos comerciales de tu obra indica:
-
-\begin{center}
-\includegraphics[scale=1.5]{images/by-nd_88x31}\\[10mm]
-{\Large \copyright~Esta obra está bajo una licencia de Creative Commons Reconocimiento-SinObraDerivada 4.0 Internacional.
-}
-\end{center}
-
-
-\bigskip
-* Si quiere permitir que se compartan las adaptaciones de tu obra mientras se comparta de la misma manera
-y quieres permitir usos comerciales de tu obra (licencia de Cultura Libre) indica:
-
-\begin{center}
-\includegraphics[scale=1.5]{images/by-sa_88x31}\\[10mm]
-{\Large \copyright~Esta obra está bajo una licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional.
-}
-\end{center}
-
-
-\bigskip
-* Si quiere permitir que se compartan las adaptaciones de tu obra
-y quieres permitir usos comerciales de tu obra (licencia de Cultura Libre) indica:
-
-\begin{center}
-\includegraphics[scale=1.5]{images/by_88x31}\\[10mm]
-{\Large \copyright~Esta obra está bajo una licencia de Creative Commons Reconocimiento 4.0 Internacional.
 }
 \end{center}
 
@@ -285,45 +229,22 @@ y quieres permitir usos comerciales de tu obra (licencia de Cultura Libre) indic
 \begin{abstract}
 {\em
 
-El objetivo de este trabajo ha sido ....
-%
-bla, bla, bla
-%
-bla, bla, bla
-%
-bla, bla, bla
+Con este Trabajo de Fin de Grado se ha buscado adentrar al alumno en el mundo de la investigación, y concretamente, en el campo de las meta-heurísticas. Para ello, se han implementado diversas técnicas algorítmicas, incluyendo algunas técnicas pertenecientes a la familia de los algoritmos evolutivos, así como otras técnicas meta-heurísticas poblacionales de trayectoria.
 
 \bigskip
-La competencia [E6], que figura en la guía docente, indica que en la memoria del trabajo se ha de incluir:
-antecedentes, problemática o estado del arte, objetivos, fases y desarrollo del proyecto,
-conclusiones, y líneas futuras.
 
-
-\bigskip
-Se ha incluido el apartado de 'Licencia' con todas las posibles licencias abiertas (Creative Commons).
-En el caso en que se decida hacer público el contenido de la memoria, habrá que elegir una de ellas
-(y borrar las demás).
-La decisión de hacer pública o no la memoria se indica en el momento de subir la memoria a la Sede Electrónica de la ULL, paso necesario en el proceso de presentación del TFG.
+Para evaluar el rendimiento de los algoritmos implementados, 
+se ha participado en una competición de optimización global continua denominada 
+Generalization-based Contest in Global Optimization (GenOpt)
 
 \bigskip
-El documento de memoria debe tener un máximo de 50 páginas.
 
-\bigskip
-No se deben dejar páginas en blanco al comenzar un capítulo, ya que
-el documento no está pensado para se impreso sino visionado
-con un lector de PDFs.
+En concreto, se han implementado los algoritmos Opposition-Based-Learning Competitive-Particle Swarm Optimization, Covariance Matrix Adaptation Evolutionary Strategy y Simulated Annealing los cuales se han aplicado a los problemas propuestos por la competición GenOpt. La elección de estos algoritmos se basa en la demostración de su buen desempeño en problemas de optimización global continua. Además de los tres algoritmos mencionados, se ha desarrollado el conjunto de métricas, especificadas en el manifiesto de la competición, necesarias para evaluar el rendimiento de los algoritmos desarrollados.
 
-\bigskip
-También es recomendable márgenes pequeños ya que, al firmar digitalmente por
-la Sede, se coloca un marco alrededor del texto original.
-
-
-\bigskip
-El tipo de letra base ha de ser de 14ptos.
 }
 
 \begin{palabrasClave}
-Palabra reservada1, Palabra reservada2, ...
+Optimización global continua, Meta-heurísticas, Computación Evolutiva, Ajuste de parámetros.
 \end{palabrasClave}
 
 \end{abstract}
@@ -334,12 +255,16 @@ Palabra reservada1, Palabra reservada2, ...
 \begin{summary}
 {\em
 
-Here should be the abstract in a foreing language...
+The main goal of this degree thesis is to introduce the student to the research field through the application of several meta-heuristic approaches to global continuous optimization problems. For doing that, we have developed several algorithmic techniques, including some techniques belonging to the family of evolutionary algorithms, as well as other population and trajectory-based meta-heuristics.
+
+In order to assess the performance of the implemented schemes, we have participated in a competition on global continuous optimization referred to as Generalization-based Contest in Global Optimization (GENOPT). The main aim of this competition is diversify the number of approaches solving the proposed problems.
+
+In particular, we have implemented the algorithms Opposition-based Learning Competitive Particle Swarm Optimization, Covariance Matrix Adaptation Evolution Strategy and Simulated Annealing, which have been applied to solve the problems proposed by the GENOPT. The aforementioned algorithms were chosen because they have shown to provide better performance in comparison to other alternatives when dealing with global continuous optimization problems. In addition to the above, we have also implemented a set of metrics proposed by the competition organization with the aim of measuring the performance of our algorithmic proposals.
 
 }
 
 \begin{keywords}
-Keyword1, Keyword2, Keyword3, ...
+Global continuos optimization,, Meta-heuristics, Evolutionary computation, parameter setting.
 \end{keywords}
 
 \end{summary}
@@ -356,7 +281,7 @@ Keyword1, Keyword2, Keyword3, ...
 % No funciona bien \markboth sin "twoside" en \documentclass, pero al
 % ponerlo se dan un montÃ³n de errores de underfull \vbox, con lo que no se
 % ha puesto.
-\markboth{Nombre del alumno}{Título del proyecto}
+\markboth{Alejandro Marrero Díaz}{Desarrollo Dirigido por Retos}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Numeracion en romanos
@@ -389,30 +314,29 @@ Keyword1, Keyword2, Keyword3, ...
 \chapter{Introducción}
 \label{chapter:intro}
 
-\input{cap1.tex}
+\input{chapters/cap1.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Título del Capítulo Dos}
+\chapter{Conceptos previos}
 \label{chapter:dos}
-
-\input{cap2.tex}
+\input{chapters/cap2.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage{\pagestyle{empty}}
 \thispagestyle{empty}
 
-\chapter{Título del Capítulo Tres}
+\chapter{Técnicas Algorítmicas Desarrolladas}
 \label{chapter:tres}
 
-\input{cap3.tex}
+\input{chapters/cap3.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Título del Capítulo Cuatro}
+\chapter{Evaluación experimental}
 \label{chapter:cuatro}
 
-\input{cap4.tex}
+\input{chapters/cap4.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage{\pagestyle{empty}}
@@ -421,7 +345,7 @@ Keyword1, Keyword2, Keyword3, ...
 \chapter{Conclusiones y líneas futuras}
 \label{chapter:Conclusiones}
 
-\input{cap5.tex}
+\input{chapters/cap5.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage{\pagestyle{empty}}
@@ -430,7 +354,7 @@ Keyword1, Keyword2, Keyword3, ...
 \chapter{Summary and Conclusions }
 \label{chapter:ingles}
 
-\input{cap6.tex}
+\input{chapters/cap6.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage{\pagestyle{empty}}
@@ -439,26 +363,10 @@ Keyword1, Keyword2, Keyword3, ...
 \chapter{Presupuesto}
 \label{chapter:Presupuesto}
 
-\input{cap7.tex}
+\input{chapters/cap7.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage{\pagestyle{empty}}
-\thispagestyle{empty}
-\begin{appendix}
-
-\chapter{Título del Apéndice 1}
-\label{appendix:1}
-\input{apendice1.tex}
-
-\chapter{Título del Apéndice 2}
-\label{appendix:2}
-\input{apendice2.tex}
-
-\end{appendix}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addcontentsline{toc}{chapter}{Bibliografía}
 \bibliographystyle{plain}
 
@@ -468,3 +376,4 @@ Keyword1, Keyword2, Keyword3, ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
+

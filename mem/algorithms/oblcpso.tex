@@ -1,0 +1,20 @@
+
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwResult{Óptimo global}
+    Inicializar;\\
+    \While{Condición de parada no satisfecha}{
+        Agitar(S); \\
+       \ForEach{$ k=1: N/3 $}{
+            $ r_{1} = S(k)$; \\
+            $ r_{2} = S(k + N/3)$; \\
+            $ r_{3} = S(k + 2N/3)$; \\
+            $(w, n, l) = competir(r_{1}, r_{2}, r_{3})$; \\
+            Actualizar $ X^{k}_{ld}(t)$ (Ec. \ref{eq:7} y Ec. \ref{eq:8});\\
+            Actualizar $ X^{k}_{nd}(t)$ (Ec. \ref{eq:9});\\
+            Actualizar los valores de fitness para N y L; \\
+       }
+    }
+    \caption{OBL Competitive-Particle Swarm Optimization}
+\end{algorithm}

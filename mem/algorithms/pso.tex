@@ -1,0 +1,20 @@
+
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwResult{Óptimo global}
+    \While{Condición de parada no satisfecha}{
+       \ForEach{$p_{i}$ en S}{
+            Evaluar $ p_{i} $; \\
+            Actualizar mejor posición; \\
+            Actualizar mejor global; \\
+       }
+       \ForEach{$p_{i}$ en S}{
+        \ForEach{$d_{i}$ en D}{
+            $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\
+            $ x_{i,d} = x_{i,d} + v_{i,d}$; \\
+            }
+       }
+    }
+    \caption{Particle Swarm Optimization}
+\end{algorithm}

@@ -1,0 +1,23 @@
+
+\begin{algorithm}[H]
+ \SetAlgoLined
+    \KwData{\[ m\in R^{n}, \sigma\in R_{+}, \lambda\]}
+    \KwResult{Óptimo global}
+    Inicialización: \\
+    \[C = I, p_{c} = 0, p_{\sigma} = 0\]
+    \[ c_{c}\approx 4/n, c_{\sigma}\approx 4/n, c_{1}\approx 2/n^2, c_{\mu}\approx \mu_{w}/n^2, c_{1} + c_{\mu}\leq 1\]
+    \[ d_{\sigma}\approx 1+\sqrt{\frac{\mu_{w}}{n}}, 
+    w_{i}=1...\lambda \quad tal\quad que \quad \mu_{w} = \frac{1}{\sum_{i=1}^{\mu}w_{i}^2}\approx 0.3\lambda\]
+    \While{Condición de para no satisfecha}{
+        Muestreo (Ec.\ref{eq:1}); \\
+        Actualizar el valor medio (Ec. \ref{eq:2}); \\  
+        Incremento de C (Ec. \ref{eq:3}); \\
+        Incremento de $\sigma$ (Ec. \ref{eq:4}); \\
+        Actualizar C (Ec. \ref{eq:5}); \\
+        Actualizar $\sigma$ (Ec. \ref{eq:6});\\
+        \If{Reinicio necesario}{
+            Reiniciar;
+        }
+    }
+    \caption{Covariance Matrix Adaptation Evolutionary Strategy}
+\end{algorithm}
