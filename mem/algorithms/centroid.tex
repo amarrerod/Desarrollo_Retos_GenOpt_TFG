@@ -1,0 +1,14 @@
+
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwResult{Centroide}
+    \For{$i \leftarrow 0 $ \KwTo $D$}{
+      Suma = 0;  \\
+      \For{$j \leftarrow 0 $ \KwTo $\left | S \right |$}{
+        Suma = Suma + S[j][i];
+      }
+      Centroide[i] = $\frac{Suma}{\left | S \right |}$;
+    }
+    \caption{CalcularCentroide}
+\end{algorithm}

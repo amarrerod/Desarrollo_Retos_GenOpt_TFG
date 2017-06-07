@@ -25,6 +25,30 @@ Análogamente, para el caso de optimizar una función n-dimensional la solución
 
 En nuestro desarrollo hemos empleado este concepto en varios procesos, como puede ser el proceso de inicialización de los individuos que formarán parte de la primera población o bien, tras cada iteración del algoritmo como medida de diversificación. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Búsqueda Global}\label{sec:BG}
+
+En ciencias de la computación, una búsqueda global (Global-Search) es un método heurístico para resolver problemas complejos de optimización\cite{GlobalSearch, GlobalSearch2, GlobalSearch3}. %Una búsqueda global puede formularse como encontrar una solución óptima dentro de un conjunto de soluciones factibles: \\
+%\begin{equation}
+ %   X' \in \Omega \quad \land \quad f(x')\leq f(x)
+%\end{equation}
+%
+El funcionamiento básico de una búsqueda global se basa en que el algoritmo se mueve dentro del espacio de búsqueda recorriendo todas las soluciones factibles y aplicando cambios a cada una de ellas hasta encontrar una solución óptima. 
+
+Para nuestro trabajo, hemos diseñado una búsqueda global que se aplicará tras cada iteración de los algoritmos que hemos desarrollado con el objetivo de obtener una mayor diversificación y escapar de los óptimos locales. En primer lugar, el procedimiento calculará el individuo centroide de la población. El centroide de un conjunto n-dimensional de $k$ elementos se define como:
+\begin{equation}\label{centroide}
+    C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
+\end{equation}
+
+Para nuestro caso particular, debemos tener en cuenta que cada uno de nuestros elementos $x_{i}$ representan una solución factible a nuestro problema con $d$ variables cada uno. Es por ello que, el individuo centroide se calculará de la siguiente manera: 
+\input{algorithms/centroid.tex}
+Seguidamente, pasaremos a explorar la población de individuos aplicando pequeñas modificaciones a cada uno de ellos para obtener nuevos individuos \textit{hijos}. Si estos individuos mejoran a sus ancestros serán incluidos dentro del conjunto de soluciones S y continuaremos aplicando modificaciones a su ancestro hasta que no se produzca mejora en su descendencia. En otro caso, serán descartados.
+Finalmente, devolveremos una nueva población con los $|S|$ mejores individuos encontrados entre padres e hijos. \\
+A continuación podemos ver el pseudocódigo de nuestra aproximación de búsqueda global empleada en nuestros desarrollos: 
+
+\input{algorithms/globalSearch.tex}
+
+
 \section{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}
 \label{sec:OBL-CPSO}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,6 +168,9 @@ Finalmente, podemos ver en la siguiente figura el pseudocódigo de nuestra aprox
 \section{Simulated Annealing (SA)}
 \label{sec:SA}
 
+Simulated Annealing es una meta-heurística que se basa en una búsqueda probabilística con una única solución. SA está inspirada por el proceso de recocido en la metalurgia \cite{metabook}. El recocido es un proceso físico donde un sólido es enfriado lentamente hasta que su estructura se congela en una configuración de mínima energía. \cite{metabook}
+
+\input{algorithms/simulatedAnnealing.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -1,0 +1,15 @@
+
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwResult{Óptimo global}
+    S = GenerarSolucionAleatoria(); \\
+    T = InicializarTemperatura(); \\
+    \While{Condicion de parada no satisfecha}{
+      S = AplicarPerturbacionAleatoria(S); \\
+      EvaluarDiferencia(); \\
+      T = ActualizarTemperatura(T); \\
+      BusquedaGlobal();
+    }
+    \caption{Simulated Annealing}
+\end{algorithm}
