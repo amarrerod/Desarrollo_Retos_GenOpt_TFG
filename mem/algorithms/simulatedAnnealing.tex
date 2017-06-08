@@ -6,9 +6,10 @@
     S = GenerarSolucionAleatoria(); \\
     T = InicializarTemperatura(); \\
     \While{Condicion de parada no satisfecha}{
-      S = AplicarPerturbacionAleatoria(S); \\
-      EvaluarDiferencia(); \\
-      T = ActualizarTemperatura(T); \\
+      S' = AplicarPerturbacionAleatoria(S); \ref{eq:perturbation}\\
+      EvaluarDiferencia(S, S'); \ref{eq:evaluate} \\
+      S = ActualizarSolucion(S, S');  \ref{eq:other} \\
+      T = ActualizarTemperatura(T); \ref{eq:decreaseT} \\
       BusquedaGlobal();
     }
     \caption{Simulated Annealing}

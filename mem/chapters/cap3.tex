@@ -35,7 +35,7 @@ En ciencias de la computación, una búsqueda global (Global-Search) es un méto
 %
 El funcionamiento básico de una búsqueda global se basa en que el algoritmo se mueve dentro del espacio de búsqueda recorriendo todas las soluciones factibles y aplicando cambios a cada una de ellas hasta encontrar una solución óptima. 
 
-Para nuestro trabajo, hemos diseñado una búsqueda global que se aplicará tras cada iteración de los algoritmos que hemos desarrollado con el objetivo de obtener una mayor diversificación y escapar de los óptimos locales. En primer lugar, el procedimiento calculará el individuo centroide de la población. El centroide de un conjunto n-dimensional de $k$ elementos se define como:
+Para nuestro trabajo, hemos diseñado una búsqueda global que \textbf{se aplicará como último paso en cada iteración de los algoritmos} que hemos desarrollado con el objetivo de obtener una mayor diversificación y escapar de los posibles óptimos locales. En primer lugar, el procedimiento calculará el individuo centroide de la población. El centroide de un conjunto n-dimensional de $k$ elementos se define como:
 \begin{equation}\label{centroide}
     C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
 \end{equation}
@@ -138,9 +138,9 @@ La siguiente fórmula muestra el cálculo que lleva a cabo el algoritmo para obt
 
 
 \subsection{Paso para $ \sigma $}
-La siguiente fórmula muestra el cálculo que lleva a cabo el algoritmo para obtener el nuevo valor de paso para $\sigma$.
+El siguiente paso del algoritmo es calcular el valor de paso para el paŕametro de control $\sigma$. Para ello, aplicamos la siguiente fórmula:
 \begin{equation} \label{eq:4}
-     p_{\mu} \leftarrow (1 - c_{\sigma})p_{\sigma}\sqrt{1 - (1 - c_{\sigma})^2}\sqrt{\mu_{w}}\cdot C^{-1/2}y_{w} \\
+     p_{\sigma} \leftarrow (1 - c_{\sigma})p_{\sigma}\sqrt{1 - (1 - c_{\sigma})^2}\sqrt{\mu_{w}}\cdot C^{-1/2}y_{w} \\
 \end{equation}
 
 \subsection{Actualizar C}
@@ -150,7 +150,7 @@ Una vez calculados los tamaños de paso, es el momento de actualizar la matriz d
 \end{equation}
 
 \subsection{Actualizar $ \sigma $}
-Por último, sólo queda actualizar el valor de $\sigma$ para la siguiente iteración. 
+Por último, sólo queda actualizar el valor de $\sigma$ para la siguiente iteración aplicando la fórmula:  
 \begin{equation} \label{eq:6}
      \sigma\leftarrow\sigma \times \exp(\frac{c_{\sigma}}{d_{\sigma}} (\frac{\left \| p_{\sigma}\right\|}{E \left \|N(0, I)\right \|}) - 1)
 \end{equation}
@@ -168,8 +168,36 @@ Finalmente, podemos ver en la siguiente figura el pseudocódigo de nuestra aprox
 \section{Simulated Annealing (SA)}
 \label{sec:SA}
 
-Simulated Annealing es una meta-heurística que se basa en una búsqueda probabilística con una única solución. SA está inspirada por el proceso de recocido en la metalurgia \cite{metabook}. El recocido es un proceso físico donde un sólido es enfriado lentamente hasta que su estructura se congela en una configuración de mínima energía. \cite{metabook}
+Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística que se basa en una búsqueda probabilística con una única solución. SA está inspirada por el proceso de recocido en la metalurgia \cite{metabook}. El recocido es un proceso físico donde un sólido es enfriado lentamente hasta que su estructura se congela en una configuración de mínima energía. \cite{metabook}
 
+En SA, con una alta temperatura T, el sistema ignora los pequeños cambios en la energía y se aproxima a un equilibrio térmico rápidamente, es decir, se realiza una búsqueda global del mínimo dentro del espacio de búsqueda. En cambio, cuando la temperatura es baja, el sistema realiza una búsqueda local en el \textit{"vecindario"} del mínimo encontrado en busca de una solución mejor. \cite{metabook} \\
+
+Inicialmente el algoritmo SA calcula una solución factible inicial aleatoriamente para comenzar el proceso de búsqueda. Además, se define T con un valor definido por el usuario, generalmente un valor muy elevado.
+Durante el proceso de búsqueda del óptimo global, la solución aleatoria generada inicialmente sufre ciertas variaciones obteniendo una nueva solución $x'$ a partir de la siguiente fórmula: 
+
+\begin{equation}\label{eq:perturbation}
+    x = x + \Delta x
+\end{equation}
+
+Seguidamente, se evalua la diferencia de energía (E) entre ambas soluciones como muestra la siguiente fórmula:
+
+\begin{equation}\label{eq:evaluate}
+    \Delta E(x) = E(x + \Delta x) - E(x)
+\end{equation}
+
+La solución $x'$ será directamente aceptada como nueva solución factible sí $\Delta E(x) < 0$. En caso contrario, $x'$ se aceptará con probabilidad: \\
+
+\begin{equation}\label{eq:other}
+    P = e^{- \frac{\Delta E}{T}}
+\end{equation}
+
+Por último, debemos decrementar el valor de la temperatura con un valor prefijado: 
+
+\begin{equation} \label{eq:decreaseT}
+    T = T - \Delta T
+\end{equation}
+
+El siguiente pseudocódigo presenta el algoritmo SA desarrollado en este trabajo. 
 \input{algorithms/simulatedAnnealing.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
