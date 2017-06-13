@@ -1,21 +1,20 @@
-
-
-\begin{algorithm}[H]
-    \SetAlgoLined
-    \KwResult{Óptimo global}
-    Inicializar;\\
-    \While{Condición de parada no satisfecha}{
-        Agitar(S); \\
-       \ForEach{$ k=1: N/3 $}{
-            $ r_{1} = S(k)$; \\
-            $ r_{2} = S(k + N/3)$; \\
-            $ r_{3} = S(k + 2N/3)$; \\
-            $(w, n, l) = competir(r_{1}, r_{2}, r_{3})$; \\
-            Actualizar $ X^{k}_{ld}(t)$ (Ec. \ref{eq:7} y Ec. \ref{eq:8});\\
-            Actualizar $ X^{k}_{nd}(t)$ (Ec. \ref{eq:9});\\
-            Actualizar los valores de fitness para N y L; \\
-       }
-        BusquedaGlobal(); \\
-    }
-    \caption{OBL Competitive-Particle Swarm Optimization}
+\begin{algorithm}[]
+  \caption{OBL Competitive Particle Swarm Optimization(\mbox{})}
+  \label{pseu:oblcpso}
+  \begin{algorithmic}[1]
+    \STATE Inicializar();
+    \WHILE{Condición de para no satisfecha}
+      \FORALL{$ k=1: N/3 $}
+        \STATE $ r_{1} = S(k)$;
+        \STATE $ r_{2} = S(k + N/3)$;
+        \STATE $ r_{3} = S(k + 2N/3)$;
+        \STATE $(w, n, l) = competir(r_{1}, r_{2}, r_{3})$;
+        \STATE Actualizar $ X^{k}_{ld}(t)$; (Ec. \ref{eq:7} y Ec. \ref{eq:8})
+        \STATE Actualizar $ X^{k}_{nd}(t)$; (Ec. \ref{eq:9})
+        \STATE Actualizar los valores de fitness para N y L;
+      \ENDFOR
+      \STATE BusquedaGlobal(); \ref{sec:BG}
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
 \end{algorithm}

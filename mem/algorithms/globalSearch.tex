@@ -1,40 +1,42 @@
 
 
-\begin{algorithm}[H]
-    \SetAlgoLined
-    \KwResult{$\left | S \right |$ mejores individuos encontrados}
-    NumIndividuos = $\left | S \right |$; \\
-    OrdenarPoblacion(S); \\
-    MarcarNoExplorados(S); \\
-    Centroide = CalcularCentroide(); \\
-    NumeroMejora = 0;    \\
-    NumeroExplorado = 0; \\
-    \While{$NumeroMejora > 0 $ y $NumeroExplorado < \left | S \right |$}{
-      k = 0; \\
-      \While{$S[k] = explorado $ y $NumeroExplorado < \left | S \right |$}{
-        k = rand(0, $\left | S \right |$);
-      }
-      S[k] = explorado; \\
-      NumeroExplorado = NumeroExplorado + 1; \\
-      Mejora = true; \\
-      \While{Mejora}{
-        \While{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}{
-          GenerarRand(a1, a2, a3);
-        }
-        \While{$ r_{1} < k$}{
-            $ r_{1}$ = rand(0, $\left | S \right |$); 
-        }
-        NuevoInd = ModificarIndividuo(k, a1, a2, a3, Centroide, $r_{1}$); \\
-        \If{$NuevoInd < S[k]$}{
-          Mejora = true; \\
-          $S = S \cap NuevoInd$; \\
-          NumeroMejora = NumeroMejora + 1;
-        } \Else{
-          Mejora = false; 
-        }
-      }
-    }
-    OrdenarPoblacion(S); \\
-    S = ObtenerMejores(0, NumIndividuos, S);
-    \caption{Búsqueda Global}
+\begin{algorithm}[p]
+  \caption{Búsqueda global(\mbox{})}
+  \label{pseu:bg}
+  \begin{algorithmic}[]
+    \STATE NumIndividuos = $\left | S \right |$;
+    \STATE OrdenarPoblacion(S);
+    \STATE MarcarNoExplorados(S);
+    \STATE Centroide = CalcularCentroide();
+    \STATE NumeroMejora = 0;
+    \STATE NumeroExplorado = 0;
+    \WHILE{$NumeroMejora > 0 $ y $NumeroExplorado < \left | S \right |$}
+      \STATE k = 0;
+      \WHILE{$S[k] = explorado $ y $NumeroExplorado < \left | S \right |$}
+        \STATE k = rand(0, $\left | S \right |$);
+      \ENDWHILE
+      \STATE S[k] = explorado;
+      \STATE NumeroExplorado = NumeroExplorado + 1;
+      \STATE Mejora = true;
+      \WHILE{$Mejora = true$}
+        \WHILE{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}
+          \STATE GenerarRand(a1, a2, a3);
+        \ENDWHILE
+        \WHILE{$ r_{1} < k$}
+          \STATE $ r_{1}$ = rand(0, $\left | S \right |$);
+        \ENDWHILE
+        \STATE NuevoInd = ModificarIndividuo(k, a1, a2, a3, Centroide, $r_{1}$);
+        \IF{$NuevoInd < S[k]$}
+          \STATE $Mejora = true;$
+          \STATE $S = S \cap NuevoInd$;
+          \STATE NumeroMejora = NumeroMejora + 1;
+          \ELSE
+            \STATE Mejora = false;
+        \ENDIF
+      \ENDWHILE
+    \ENDWHILE
+    \STATE OrdenarPoblacion(S); 
+    \STATE S = ObtenerMejores(0, NumIndividuos, S);
+    \RETURN $\left | S \right |$ mejores individuos encontrados
+  \end{algorithmic}
 \end{algorithm}

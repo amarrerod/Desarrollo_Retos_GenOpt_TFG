@@ -1,16 +1,16 @@
-
-
-\begin{algorithm}[H]
-    \SetAlgoLined
-    \KwResult{Óptimo global}
-    S = GenerarSolucionAleatoria(); \\
-    T = InicializarTemperatura(); \\
-    \While{Condicion de parada no satisfecha}{
-      S' = AplicarPerturbacionAleatoria(S); \ref{eq:perturbation}\\
-      EvaluarDiferencia(S, S'); \ref{eq:evaluate} \\
-      S = ActualizarSolucion(S, S');  \ref{eq:other} \\
-      T = ActualizarTemperatura(T); \ref{eq:decreaseT} \\
-      BusquedaGlobal();
-    }
-    \caption{Simulated Annealing}
+\begin{algorithm}[t]
+  \caption{Simulated Annealing(\mbox{})}
+  \label{pseu:sa}
+  \begin{algorithmic}[1]
+    \STATE S = GenerarSolucionAleatoria();
+    \STATE T = InicializarTemperatura(); 
+    \WHILE{Condición de para no satisfecha}
+        \STATE S' = AplicarPerturbacionAleatoria(S); \ref{eq:perturbation}
+        \STATE EvaluarDiferencia(S, S'); \ref{eq:evaluate} 
+        \STATE S = ActualizarSolucion(S, S');  \ref{eq:other}
+        \STATE T = ActualizarTemperatura(T); \ref{eq:decreaseT}
+        \STATE BusquedaGlobal(); secc. \ref{sec:BG}
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
 \end{algorithm}

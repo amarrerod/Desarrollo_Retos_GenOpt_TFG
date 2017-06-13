@@ -1,20 +1,20 @@
-
-
-\begin{algorithm}[H]
-    \SetAlgoLined
-    \KwResult{Óptimo global}
-    \While{Condición de parada no satisfecha}{
-       \ForEach{$p_{i}$ en S}{
-            Evaluar $ p_{i} $; \\
-            Actualizar mejor posición; \\
-            Actualizar mejor global; \\
-       }
-       \ForEach{$p_{i}$ en S}{
-        \ForEach{$d_{i}$ en D}{
-            $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\
+\begin{algorithm}[p]
+  \caption{Particle Swarm Optimization(\mbox{})}
+  \label{pseu:pso}
+  \begin{algorithmic}[1]
+    \WHILE{Condición de para no satisfecha}
+      \FORALL{$p_{i}$ en S}
+        \STATE Evaluar $ p_{i} $;
+        \STATE Actualizar mejor posición $pb_{i}$;
+        \STATE Actualizar mejor global $gb$;
+      \ENDFOR
+      \FORALL{$p_{i}$ en S}
+       \FORALL{$d_{i}$ en D}
+       \STATE $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\
             $ x_{i,d} = x_{i,d} + v_{i,d}$; \\
-            }
-       }
-    }
-    \caption{Particle Swarm Optimization}
+       \ENDFOR
+      \ENDFOR
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
 \end{algorithm}

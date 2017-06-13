@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Opposition-based Learning (OBL)\cite{obl, obl2, OPSO, OPSO2, OPSO3} es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización. Cuando evaluamos una solución X candidata para un problema dado, simultáneamente  
- calcularemos la solución opuesta $\overline{X}$, consiguiendo así una mayor exploración del espacio de búsqueda $\Omega$ en busca del óptimo global. \cite{obl}\\
+ calcularemos la solución opuesta $\overline{X}$, consiguiendo así una mayor exploración del espacio de búsqueda $\Omega$ en busca del óptimo global \cite{obl}. Asimismo, podemos encontrar diversas variantes a la estrategia tradicional de OBL como pueden ser: Quasi-opposition-based Learning (QOBL), Quasi-reflected Opposition-based Learning (QROBL).
 
 Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma\cite{obl}: \\
  \begin{equation}
@@ -28,12 +28,12 @@ En nuestro desarrollo hemos empleado este concepto en varios procesos, como pued
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Búsqueda Global}\label{sec:BG}
 
-En ciencias de la computación, una búsqueda global (Global-Search) es un método heurístico para resolver problemas complejos de optimización\cite{GlobalSearch, GlobalSearch2, GlobalSearch3}. %Una búsqueda global puede formularse como encontrar una solución óptima dentro de un conjunto de soluciones factibles: \\
+En ciencias de la computación, una búsqueda global (Global Search) es un método heurístico para resolver problemas complejos de optimización \cite{GlobalSearch, GlobalSearch2, GlobalSearch3}. %Una búsqueda global puede formularse como encontrar una solución óptima dentro de un conjunto de soluciones factibles: \\
 %\begin{equation}
  %   X' \in \Omega \quad \land \quad f(x')\leq f(x)
 %\end{equation}
 %
-El funcionamiento básico de una búsqueda global se basa en que el algoritmo se mueve dentro del espacio de búsqueda recorriendo todas las soluciones factibles y aplicando cambios a cada una de ellas hasta encontrar una solución óptima. 
+El funcionamiento básico de una búsqueda global se basa en que el algoritmo se mueve dentro del espacio de búsqueda explorando todas las soluciones factibles y aplicando cambios a cada una de ellas hasta encontrar una solución óptima. 
 
 Para nuestro trabajo, hemos diseñado una búsqueda global que \textbf{se aplicará como último paso en cada iteración de los algoritmos} que hemos desarrollado con el objetivo de obtener una mayor diversificación y escapar de los posibles óptimos locales. En primer lugar, el procedimiento calculará el individuo centroide de la población. El centroide de un conjunto n-dimensional de $k$ elementos se define como:
 \begin{equation}\label{centroide}
@@ -44,9 +44,10 @@ Para nuestro caso particular, debemos tener en cuenta que cada uno de nuestros e
 \input{algorithms/centroid.tex}
 Seguidamente, pasaremos a explorar la población de individuos aplicando pequeñas modificaciones a cada uno de ellos para obtener nuevos individuos \textit{hijos}. Si estos individuos mejoran a sus ancestros serán incluidos dentro del conjunto de soluciones S y continuaremos aplicando modificaciones a su ancestro hasta que no se produzca mejora en su descendencia. En otro caso, serán descartados.
 Finalmente, devolveremos una nueva población con los $|S|$ mejores individuos encontrados entre padres e hijos. \\
-A continuación podemos ver el pseudocódigo de nuestra aproximación de búsqueda global empleada en nuestros desarrollos: 
+A continuación, podemos ver el pseudocódigo de nuestra aproximación de búsqueda global empleada en nuestros desarrollos: 
 
 \input{algorithms/globalSearch.tex}
+
 
 
 \section{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}
@@ -56,14 +57,14 @@ A continuación podemos ver el pseudocódigo de nuestra aproximación de búsque
 \subsection{Particle Swarm Optimization}
 Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es una estrategia de optimización que ha demostrado ser muy eficiente en problemas de optimización global continua. Se basa en simular el conjunto de soluciones candidatas a un problema dado como un enjambre de partículas que se mueven dentro de un espacio de búsqueda definido. Dado que las partículas se mueven, estas poseen una posición \textit{x} y una velocidad \overrightarrow{v} en cada instante \textit{t} de ejecución del algoritmo. La posición \textit{x} representa los valores que toman las diferentes variables dentro de una solución y, la velocidad \overrightarrow{v}, determinará la dirección y la rapidez con la que la partícula se desplazará por el espacio de búsqueda, es decir, el factor de modificación para cada una de las variables de decisión. A parte de estas características, cada partícula tiene la capacidad de recordar su mejor posición alcanzada durante la ejecución del algoritmo, y para cada partícula $p_{i}$ la denotaremos como $pb_{i}$\cite{metabook}. Esto nos permite evaluar si el movimiento de una partícula mejora la solución actual o por el contrario es mejor permanecer en la posición actual. \\
 
-Por otra parte, en el algoritmo PSO también se tiene en cuenta una partícula denominada \textit{global best} en la que se almacena la mejor posición histórica alcanzada por una partícula dentro del enjambre. Estas dos posiciones $pb_{i}$ y \textit{gb} son usadas en cada iteración del algoritmo para atraer el movimiento de las partículas hacia esas posiciones, consiguiendo así que el algoritmo PSO converga rápidamente hacia las soluciones óptimas. \\
-A continuación se muestra el esquema básico del algoritmo PSO \cite{metabook}: 
+Por otra parte, en el algoritmo PSO también se tiene en cuenta una partícula denominada \textit{global best $(gb)$} en la que se almacena la mejor posición histórica alcanzada por una partícula dentro del enjambre. Estas dos posiciones $pb_{i}$ y \textit{gb} son usadas en cada iteración del algoritmo para atraer el movimiento de las partículas hacia esas posiciones, consiguiendo así que el algoritmo PSO converga rápidamente hacia las soluciones óptimas. \\
+A continuación, se muestra el esquema básico del algoritmo PSO: 
 \input{algorithms/pso.tex}
 
 \subsection{OBL-CPSO}
-En esta ocasión, el algoritmo Opposition-based Learning Competitive-Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} desarrollado incluye dos modificaciones sobre el esquema básico del algoritmo PSO como son Opposition-based Learning, detallado en el apartado \ref{sec:OBL}, y un procedimiento de competición entre las partículas que conforman el enjambre. \\
+En esta ocasión, el algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} desarrollado incluye dos modificaciones sobre el esquema básico del algoritmo PSO como son Opposition-based Learning, detallado en el apartado \ref{sec:OBL}, y un procedimiento de competición entre las partículas que conforman el enjambre. \\
 
-El procedimiento de competición se basa en escoger tres partículas dentro del enjambre aleatoriamente, hacerlas competir entre ellas, mediante su valor de función objetivo, obteniendo un partícula ganadora otra perdedora y una partícula neutra para, posteriormente, eliminarlas del enjambre. Para un enjambre de tamaño N, en cada iteración del algoritmo se realizarán N/3 \cite{oblcpso}. Tras cada competición, la partícula ganadora pasará directamente a la siguiente iteración del algoritmo y la partícula perdedora pasará también a la siguiente iteración tras aprender de la partícula ganadora, es decir, la partícula ganadora atrae a la partícula perdedora hacia su posición. La partícula neutral será la escogida para utilizarla en la estrategia de OBL y seguidamente pasar a la siguiente iteración, consiguiendo así explorar por completo el espacio de búsqueda \cite{oblcpso}. \\
+El procedimiento de competición se basa en escoger tres partículas dentro del enjambre aleatoriamente, hacerlas competir entre ellas, mediante su valor de función objetivo, obteniendo un partícula ganadora, otra perdedora y una partícula neutra para, posteriormente, eliminarlas del enjambre. Para un enjambre de tamaño N, en cada iteración del algoritmo se realizarán N/3 competiciones \cite{oblcpso}. Tras cada competición, la partícula ganadora pasará directamente a la siguiente iteración del algoritmo y la partícula perdedora pasará también a la siguiente iteración tras aprender de la partícula ganadora, es decir, la partícula ganadora atrae a la partícula perdedora hacia su posición. La partícula neutral será la escogida para utilizarla en la estrategia de OBL y seguidamente pasar a la siguiente iteración, tratando, de este modo, de mejorar la capacidad de exploración del algoritmo \cite{oblcpso}. \\
 
 La partícula perdedora y la partícula neutral van a modificar su posición y su velocidad siguiendo las siguientes ecuaciones:
 
@@ -85,28 +86,26 @@ El pseudocódigo del algoritmo OBL-CPSO se muestra en la siguiente figura:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
-
 \section{Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)}
 \label{sec:CMA}
 
-Covariance Matrix Adaptation Evolutionary Strategy es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales. 
+Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{CMA} es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales. 
 La característica principal del algoritmo es que en cada iteración se generan, a través de una Distribución Normal Multivariante en $\Re^{d}$, $\lambda$ individuos nuevos, y a partir de estos individuos realizar una serie de cálculos intermedios para actualizar la matriz de covarianza asociada a la distribución. \\  
-El diseño del algoritmo CMA-ES no necesita un gran esfuerzo en la elección de los parámetros ya que es el algoritmo quién, internamente, se encarga de establecer los parámetros que utiliza, a excepción del tamaño de la población $\lambda$ que debe ser definido por el usuario. Sin embargo, esta estrategia interna que define los parámetros sí forma parte del diseño del algoritmo y es uno de los pilares esenciales del rendimiento del algoritmo. \\
+El diseño del algoritmo CMA-ES no necesita un gran esfuerzo en la elección de los parámetros ya que es el algoritmo quién, internamente, se encarga de establecer los parámetros que utiliza, a excepción del tamaño de la población $\lambda$ que debe ser definido por el usuario. Sin embargo, esta estrategia interna que define los parámetros sí forma parte del diseño del algoritmo y es uno de los pilares esenciales del rendimiento del mismo. \\
 
-Las estrategias internas para definir los parámetros, estrategias de reinicio y los criterios de finalización hace que encontremos una gran cantidad de variantes del algoritmo CMA-ES puro. La estructura básica del algoritmo CMA-ES se puede dividir en las siguientes etapas: \\ 
+Las estrategias internas para definir los parámetros, estrategias de reinicio y los criterios de finalización hace que encontremos una gran cantidad de variantes del algoritmo CMA-ES puro. La estructura básica del algoritmo CMA-ES se puede dividir en las etapas descritas en las siguientes secciones: \\ 
 
 \bigskip
 
 \subsection{Inicialización de los parámetros}
 
-Los parámetros comunes empleados en todas las aproximaciones del algoritmo CMA-ES son los siguientes: 
+Los parámetros comunes empleados en todas las implementaciones del algoritmo CMA-ES son los siguientes: 
 
 \begin{itemize}
 \item $\lambda$: Número de individuos de la población.
 \item C: La matriz de covarianza C tendrá dimensión $\textrm{C}_{\lambda}^{d}$, donde $\lambda$ es el número de individuos empleados por el algoritmo y \textit{d} es la dimensión de la función a optimizar.
 \item $\sigma$: Parámetro para controlar el tamaño de paso entre los demás parámetros.
-\item $\mu$: En una selección elitista, representa los mejores individuos a tener en cuenta dentro de la población.
+\item $\mu$: En una selección elitista de individuos supervivientes, representa los mejores individuos a tener en cuenta dentro de la población.
 \item $c_{c}$ y $c_{1}$: Ratio de aprendizaje para la actualización de la matriz de covarianza empleando una selección elitista de sólo un individuo.
 \item $c_{\mu}$: Ratio de aprendizaje para la actualización de la matriz de covarianza empleando los $\mu$ mejores individuos.
 \item $c_{\sigma}$: Ratio de aprendizaje para el incremento de $\sigma$.
@@ -117,7 +116,7 @@ Los parámetros comunes empleados en todas las aproximaciones del algoritmo CMA-
 \end{itemize}
 
 \subsection{Muestreo}
-La etapa de muestreo del algoritmo CMA-ES es la encargada de generar $\lambda$ nuevos individuos a partir de una Distribución Normal Multivariante de media cero y covarianza C. Estos individuos $y_{i}$ para $ i=1,...,\lambda $ son posteriormente multiplicados por $\sigma$ y sumados con el valor medio de los individuos de la generación anterior. En la etapa inicial el valor medio es generado de manera aleatoria con valores dentro del dominio de la función a optimizar. Tras esta operación obtenemos los individuos $x_{i}$ y finalizamos la etapa de muestreo.
+La etapa de muestreo del algoritmo CMA-ES es la encargada de generar $\lambda$ nuevos individuos a partir de una Distribución Normal Multivariante de media cero y covarianza C. Estos individuos $y_{i}$ para $ i=1,...,\lambda $ son posteriormente multiplicados por $\sigma$ y sumados con el valor medio de los individuos de la generación anterior. En la etapa inicial el valor medio es generado de manera aleatoria con valores dentro del dominio de la función a optimizar. Tras esta operación obtenemos los individuos $x_{i}$ y finalizamos la etapa de muestreo. A continuación, se muestra la ecuación que describe este proceso: 
 \begin{equation} \label{eq:1}
         x_{i} = m + \sigma y_{i},\quad y_{i}\sim N_{i}(0, C),\quad para\quad i=1,...,\lambda 
 \end{equation}
@@ -168,24 +167,24 @@ Finalmente, podemos ver en la siguiente figura el pseudocódigo de nuestra aprox
 \section{Simulated Annealing (SA)}
 \label{sec:SA}
 
-Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística que se basa en una búsqueda probabilística con una única solución. SA está inspirada por el proceso de recocido en la metalurgia \cite{metabook}. El recocido es un proceso físico donde un sólido es enfriado lentamente hasta que su estructura se congela en una configuración de mínima energía. \cite{metabook}
+Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística que se basa en una búsqueda probabilística con una única solución. SA está inspirada por el proceso de recocido en la metalurgia \cite{metabook}. El recocido es un proceso físico donde un sólido es enfriado lentamente hasta que su estructura se congela en una configuración de mínima energía \cite{metabook}.
 
-En SA, con una alta temperatura T, el sistema ignora los pequeños cambios en la energía y se aproxima a un equilibrio térmico rápidamente, es decir, se realiza una búsqueda global del mínimo dentro del espacio de búsqueda. En cambio, cuando la temperatura es baja, el sistema realiza una búsqueda local en el \textit{"vecindario"} del mínimo encontrado en busca de una solución mejor. \cite{metabook} \\
+En SA, con una alta temperatura T, el sistema ignora los pequeños cambios en la energía y se aproxima a un equilibrio térmico rápidamente, es decir, se realiza una búsqueda global del óptimo dentro del espacio de búsqueda. En cambio, cuando la temperatura es baja, el sistema realiza una búsqueda local en el \textit{"vecindario"} del óptimo encontrado en busca de una solución mejor \cite{metabook}. \\
 
-Inicialmente el algoritmo SA calcula una solución factible inicial aleatoriamente para comenzar el proceso de búsqueda. Además, se define T con un valor definido por el usuario, generalmente un valor muy elevado.
-Durante el proceso de búsqueda del óptimo global, la solución aleatoria generada inicialmente sufre ciertas variaciones obteniendo una nueva solución $x'$ a partir de la siguiente fórmula: 
+Inicialmente el algoritmo SA calcula una solución factible preliminar aleatoriamente para comenzar el proceso de búsqueda. Además, se define T con un valor indicado por el usuario, generalmente un valor muy elevado.
+Durante el proceso de búsqueda del óptimo global, la solución aleatoria generada inicialmente sufre ciertas variaciones obteniendo una nueva solución $x'$ a partir de la siguiente ecuación: 
 
 \begin{equation}\label{eq:perturbation}
     x = x + \Delta x
 \end{equation}
 
-Seguidamente, se evalua la diferencia de energía (E) entre ambas soluciones como muestra la siguiente fórmula:
+Seguidamente, se evalua la diferencia de energía (E) entre ambas soluciones como muestra la siguiente ecuación:
 
 \begin{equation}\label{eq:evaluate}
     \Delta E(x) = E(x + \Delta x) - E(x)
 \end{equation}
 
-La solución $x'$ será directamente aceptada como nueva solución factible sí $\Delta E(x) < 0$. En caso contrario, $x'$ se aceptará con probabilidad: \\
+La solución $x'$ será directamente aceptada como nueva solución factible sí \\ $\Delta E(x) < 0$. En caso contrario, $x'$ se aceptará con probabilidad: \\
 
 \begin{equation}\label{eq:other}
     P = e^{- \frac{\Delta E}{T}}
@@ -199,6 +198,6 @@ Por último, debemos decrementar el valor de la temperatura con un valor prefija
 
 El siguiente pseudocódigo presenta el algoritmo SA desarrollado en este trabajo. 
 \input{algorithms/simulatedAnnealing.tex}
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

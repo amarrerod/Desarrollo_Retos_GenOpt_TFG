@@ -2,9 +2,22 @@
 % Chapter 5: Conclusiones y Trabajos Futuros 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conclusiones}
 
-Este capítulo es obligatorio.
-Toda memoria de Trabajo de Fin de Grado debe incluir unas conclusiones y unas 
-líneas de trabajo futuro 
+Durante la elaboración de este TFG hemos obtenido varias conclusiones que destacaremos a continuación.
 
+En primer lugar, trabajar con algoritmos que requieren una gran cantidad de parámetros, como es el caso del algoritmo CMA-ES u OBLCPSO, hace que la evaluación del rendimiento del algoritmo sea más compleja dado que por cada parámetro se incrementa significativamente la cantidad de experimentos a realizar para probar el rendimiento del mismo. Aún así, en el caso del algoritmo CMA-ES, la naturaleza auto-reguladora del algoritmo facilita en cierta medida esta tarea. 
+
+Por otra parte, la estructura de los algoritmos ha resultado bastante adaptable ya que se ha podido incluir, en todos ellos, las diferentes técnicas de diversificación propuestas en las secciones \ref{sec:OBL} y \ref{sec:BG}
+
+Hemos de destacar además que, debido al gran número de funciones propuestas por el concurso GenOpt, las modificaciones realizadas a los algoritmos resultaron difíciles de evaluar dado que en bastantes ocasiones, la mejora era simplemente en funciones concretas y en conjunto, los resultados no variaban significativamente para considerar dicha modificación.\\
+
+Finalmente, y considerando los resultados obtenidos por las técnicas implementadas, podemos concluir que el algoritmo CMA-ES es el más eficaz resolviendo el conjunto de problemas propuesto por GenOpt.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Líneas de trabajo futuras}
+
+El trabajo desarrollado en este proyecto puede servir como base para comprobar el rendimiento de diferentes técnicas meta-heurísticas a la hora de resolver problemas de optimización continua. \\
+Además, como líneas de trabajo futuras se prevé la mejora algunas de las técnicas implementadas, así como un estudio más intensivo de los parámetros, con vistas a participar en la siguiente edición del concurso GenOpt.
