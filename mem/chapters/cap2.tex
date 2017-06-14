@@ -51,7 +51,7 @@ Esta gran variedad de técnicas se debe principalmente al gran abanico de criter
 
 \subsection{Representación}
 
-En las técnicas algorítmicas en general nos podemos encontrar con diversas maneras de representar la solución al problema y en las meta-heurísticas estás son las comunes\cite{metaheuristics}:
+En las técnicas algorítmicas en general nos podemos encontrar con diversas maneras de representar la solución al problema y en las meta-heurísticas estás son las comunes \cite{metaheuristics}:
 
 \bigskip
 
@@ -63,3 +63,16 @@ En las técnicas algorítmicas en general nos podemos encontrar con diversas man
 \end{itemize}
 
 Dadas las características del concurso seleccionado para este Trabajo de Fin de Grado, la representación empleada fue \textbf{vector de valores reales} dado que cada elemento del vector denota un valor dentro del dominio de la función para cada una de las \textbf{\textit{n variables}} que posee.
+
+\subsection{Condición de Parada}
+Generalmente, las técnicas meta-heurísticas finalizan su ejecución según un criterio de finalización o \textbf{condición de parada}. Las más comunes son: 
+
+\bigskip
+
+\begin{itemize}
+    \item Generaciones: El algoritmo se detiene al alcanzar un determinado número de generaciones de individuos producidas.
+    \item Evaluaciones: Cuando el número de evaluaciones realizadas por el algoritmo llega a un valor prefijado el algoritmo finaliza su ejecución.
+    \item Factor de error: Al alcanzar un factor de error lo suficientemente bajo como para considerar la solución óptima, el algoritmo detiene su ejecución.
+\end{itemize}
+
+En nuestro trabajo, el criterio de parada utilizado por todos los algoritmos desarrollados es \textbf{$10^{6}$ evaluaciones}, criterio prefijado por la organización del concurso GenOpt. 

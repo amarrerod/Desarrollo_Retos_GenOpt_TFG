@@ -8,17 +8,17 @@
 \label{sec:OBL}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Opposition-based Learning (OBL)\cite{obl, obl2, OPSO, OPSO2, OPSO3} es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización. Cuando evaluamos una solución X candidata para un problema dado, simultáneamente  
- calcularemos la solución opuesta $\overline{X}$, consiguiendo así una mayor exploración del espacio de búsqueda $\Omega$ en busca del óptimo global \cite{obl}. Asimismo, podemos encontrar diversas variantes a la estrategia tradicional de OBL como pueden ser: Quasi-opposition-based Learning (QOBL), Quasi-reflected Opposition-based Learning (QROBL).
+Opposition-based Learning (OBL) \cite{obl, obl2, OPSO, OPSO2, OPSO3} es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización. Cuando evaluamos una solución X candidata para un problema dado, simultáneamente  
+ calcularemos la solución opuesta $\overline{X}$, consiguiendo así una mayor exploración del espacio de búsqueda $\Omega$ en busca del óptimo global \cite{obl}. Asimismo, podemos encontrar diversas variantes a la estrategia tradicional de OBL como pueden ser: Quasi-opposition-based Learning (QOBL), Quasi-reflected Opposition-based Learning (QROBL) \cite{Segredo2017_2}.
 
-Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma\cite{obl}: \\
+Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma \cite{obl}: \\
  \begin{equation}
      \overline{x} = a + b - x  \\
  \end{equation}
 
 Análogamente, para el caso de optimizar una función n-dimensional la solución opuesta se calcularía de la siguiente forma: \\
 
- Sea $ P(x_{1}, x_{2},...,x_{n}) $ un punto dentro de un sistema de coordenadas n-dimensional con $ x_{1},...,x_{n} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$. \cite{obl} El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{n}}$ donde:\\
+ Sea $ P(x_{1}, x_{2},...,x_{n}) $ un punto dentro de un sistema de coordenadas n-dimensional con $ x_{1},...,x_{n} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$ \cite{obl}. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{n}}$ donde:\\
 \begin{equation}
     \overline{x_{i}} = a_{i} + b_{i} - x_{i} \quad i = 1,...,n \\
 \end{equation}
@@ -47,22 +47,24 @@ Finalmente, devolveremos una nueva población con los $|S|$ mejores individuos e
 A continuación, podemos ver el pseudocódigo de nuestra aproximación de búsqueda global empleada en nuestros desarrollos: 
 
 \input{algorithms/globalSearch.tex}
-
-
+\bigskip
 
 \section{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}
 \label{sec:OBL-CPSO}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Particle Swarm Optimization}
-Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es una estrategia de optimización que ha demostrado ser muy eficiente en problemas de optimización global continua. Se basa en simular el conjunto de soluciones candidatas a un problema dado como un enjambre de partículas que se mueven dentro de un espacio de búsqueda definido. Dado que las partículas se mueven, estas poseen una posición \textit{x} y una velocidad \overrightarrow{v} en cada instante \textit{t} de ejecución del algoritmo. La posición \textit{x} representa los valores que toman las diferentes variables dentro de una solución y, la velocidad \overrightarrow{v}, determinará la dirección y la rapidez con la que la partícula se desplazará por el espacio de búsqueda, es decir, el factor de modificación para cada una de las variables de decisión. A parte de estas características, cada partícula tiene la capacidad de recordar su mejor posición alcanzada durante la ejecución del algoritmo, y para cada partícula $p_{i}$ la denotaremos como $pb_{i}$\cite{metabook}. Esto nos permite evaluar si el movimiento de una partícula mejora la solución actual o por el contrario es mejor permanecer en la posición actual. \\
+Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es una estrategia de optimización que ha demostrado ser muy eficiente en problemas de optimización global continua. Se basa en simular el conjunto de soluciones candidatas a un problema dado como un enjambre de partículas que se mueven dentro de un espacio de búsqueda definido. Dado que las partículas se mueven, estas poseen una posición \textit{x} y una velocidad \overrightarrow{v} en cada instante \textit{t} de ejecución del algoritmo. La posición \textit{x} representa los valores que toman las diferentes variables dentro de una solución y, la velocidad \overrightarrow{v}, determinará la dirección y la rapidez con la que la partícula se desplazará por el espacio de búsqueda, es decir, el factor de modificación para cada una de las variables de decisión. Aparte de estas características, cada partícula tiene la capacidad de recordar su mejor posición alcanzada durante la ejecución del algoritmo, y para cada partícula $p_{i}$ la denotaremos como $pb_{i}$ \cite{metabook}. Esto nos permite evaluar si el movimiento de una partícula mejora la solución actual o por el contrario es mejor permanecer en la posición actual. \\
 
 Por otra parte, en el algoritmo PSO también se tiene en cuenta una partícula denominada \textit{global best $(gb)$} en la que se almacena la mejor posición histórica alcanzada por una partícula dentro del enjambre. Estas dos posiciones $pb_{i}$ y \textit{gb} son usadas en cada iteración del algoritmo para atraer el movimiento de las partículas hacia esas posiciones, consiguiendo así que el algoritmo PSO converga rápidamente hacia las soluciones óptimas. \\
 A continuación, se muestra el esquema básico del algoritmo PSO: 
 \input{algorithms/pso.tex}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{OBL-CPSO}
-En esta ocasión, el algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} desarrollado incluye dos modificaciones sobre el esquema básico del algoritmo PSO como son Opposition-based Learning, detallado en el apartado \ref{sec:OBL}, y un procedimiento de competición entre las partículas que conforman el enjambre. \\
+En esta ocasión, el algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} desarrollado incluye dos modificaciones sobre el esquema básico del algoritmo PSO como son Opposition-based Learning, detallado en la sección \ref{sec:OBL}, y un procedimiento de competición entre las partículas que conforman el enjambre. \\
 
 El procedimiento de competición se basa en escoger tres partículas dentro del enjambre aleatoriamente, hacerlas competir entre ellas, mediante su valor de función objetivo, obteniendo un partícula ganadora, otra perdedora y una partícula neutra para, posteriormente, eliminarlas del enjambre. Para un enjambre de tamaño N, en cada iteración del algoritmo se realizarán N/3 competiciones \cite{oblcpso}. Tras cada competición, la partícula ganadora pasará directamente a la siguiente iteración del algoritmo y la partícula perdedora pasará también a la siguiente iteración tras aprender de la partícula ganadora, es decir, la partícula ganadora atrae a la partícula perdedora hacia su posición. La partícula neutral será la escogida para utilizarla en la estrategia de OBL y seguidamente pasar a la siguiente iteración, tratando, de este modo, de mejorar la capacidad de exploración del algoritmo \cite{oblcpso}. \\
 
@@ -97,14 +99,14 @@ Las estrategias internas para definir los parámetros, estrategias de reinicio y
 
 \bigskip
 
-\subsection{Inicialización de los parámetros}
+\subsection{Inicialización de los Parámetros}
 
-Los parámetros comunes empleados en todas las implementaciones del algoritmo CMA-ES son los siguientes: 
+El algoritmo CMA-ES requiere que el usuario únicamente indique el tamaño de población a emplear y, porsteriormente es el propio algoritmo quién calcula los parámetros restantes a partir de dicho valor. Los parámetros comunes empleados en todas las implementaciones del algoritmo CMA-ES son los siguientes: 
 
 \begin{itemize}
 \item $\lambda$: Número de individuos de la población.
 \item C: La matriz de covarianza C tendrá dimensión $\textrm{C}_{\lambda}^{d}$, donde $\lambda$ es el número de individuos empleados por el algoritmo y \textit{d} es la dimensión de la función a optimizar.
-\item $\sigma$: Parámetro para controlar el tamaño de paso entre los demás parámetros.
+\item $\sigma$: Parámetro para controlar el índice de variación entre cada generación de individuos.
 \item $\mu$: En una selección elitista de individuos supervivientes, representa los mejores individuos a tener en cuenta dentro de la población.
 \item $c_{c}$ y $c_{1}$: Ratio de aprendizaje para la actualización de la matriz de covarianza empleando una selección elitista de sólo un individuo.
 \item $c_{\mu}$: Ratio de aprendizaje para la actualización de la matriz de covarianza empleando los $\mu$ mejores individuos.
@@ -137,7 +139,7 @@ La siguiente fórmula muestra el cálculo que lleva a cabo el algoritmo para obt
 
 
 \subsection{Paso para $ \sigma $}
-El siguiente paso del algoritmo es calcular el valor de paso para el paŕametro de control $\sigma$. Para ello, aplicamos la siguiente fórmula:
+Seguidamente, el algoritmo debe calcular el valor de paso para el paŕametro de control $\sigma$. Para ello, aplicamos la siguiente fórmula:
 \begin{equation} \label{eq:4}
      p_{\sigma} \leftarrow (1 - c_{\sigma})p_{\sigma}\sqrt{1 - (1 - c_{\sigma})^2}\sqrt{\mu_{w}}\cdot C^{-1/2}y_{w} \\
 \end{equation}
@@ -161,8 +163,9 @@ En nuestra implementación hemos partido de la base del algoritmo CMA-ES detalla
 Durante la fase de reinicio recalculamos todos los parámetros de la misma manera que se realiza en la fase de inicialización de parámetros a excepción del tamaño de población que en este caso lo incrementaremos para poder escapar de ese óptimo local. En este caso, el nuevo valor $\lambda$ se establecerá a 100. \\
 
 Finalmente, podemos ver en la siguiente figura el pseudocódigo de nuestra aproximación al algoritmo CMA-ES:
-\input{algorithms/cmaes.tex}
 
+\input{algorithms/cmaes.tex}
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simulated Annealing (SA)}
 \label{sec:SA}
@@ -196,8 +199,11 @@ Por último, debemos decrementar el valor de la temperatura con un valor prefija
     T = T - \Delta T
 \end{equation}
 
-El siguiente pseudocódigo presenta el algoritmo SA desarrollado en este trabajo. 
+\subsection{Pseudocódigo}
+El siguiente pseudocódigo presenta el algoritmo SA desarrollado en este trabajo. \\
+El método \textit{AplicarPerturbacionAleatoria} es el encargado de modificar la solución actual haciendo uso de la ecuación \ref{eq:perturbation}. Seguidamente, la nueva solución \textbf{S'} es comparada con su ancestro \textit{S} mediante el método \textit{EvaluarDiferencia} el cual, calcula la diferencia entre ambas mediante la ecuación \ref{eq:evaluate}. \\
+A continuación, se define la nueva solución factible actual. Para ello, el método \textit{ActualizarSolucion} recibe ambas soluciones (S y S') y la diferencia entre ellas para determinar la nueva solución factible al problema y, si fuera necesario aplicar de la ecuación \ref{eq:other} para realizar esta labor. \\
+Finalmente, se decrementa la temperatura actual aplicando la fórmula \ref{eq:decreaseT} y se aplica la búsqueda global explicada en la sección \ref{sec:BG}.
 \input{algorithms/simulatedAnnealing.tex}
-\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

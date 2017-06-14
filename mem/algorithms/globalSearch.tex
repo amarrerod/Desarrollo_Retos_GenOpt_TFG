@@ -1,6 +1,6 @@
 
 
-\begin{algorithm}[p]
+\begin{algorithm}[!ht]
   \caption{Búsqueda global(\mbox{})}
   \label{pseu:bg}
   \begin{algorithmic}[]
@@ -13,17 +13,17 @@
     \WHILE{$NumeroMejora > 0 $ y $NumeroExplorado < \left | S \right |$}
       \STATE k = 0;
       \WHILE{$S[k] = explorado $ y $NumeroExplorado < \left | S \right |$}
-        \STATE k = rand(0, $\left | S \right |$);
+        \STATE k = rand(0, $\left | S \right |$); Buscamos un individuo $k$ no explorado
       \ENDWHILE
       \STATE S[k] = explorado;
       \STATE NumeroExplorado = NumeroExplorado + 1;
       \STATE Mejora = true;
       \WHILE{$Mejora = true$}
         \WHILE{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}
-          \STATE GenerarRand(a1, a2, a3);
+          \STATE GenerarRand(a1, a2, a3); Obtenemos tres valores aleatorios para realizar la modificación del individuo
         \ENDWHILE
         \WHILE{$ r_{1} < k$}
-          \STATE $ r_{1}$ = rand(0, $\left | S \right |$);
+          \STATE $ r_{1}$ = rand(0, $\left | S \right |$); Buscamos un individuo $r_{1}$ aleatoriamente para usar sus variables en la generación del nuevo individuo
         \ENDWHILE
         \STATE NuevoInd = ModificarIndividuo(k, a1, a2, a3, Centroide, $r_{1}$);
         \IF{$NuevoInd < S[k]$}

@@ -1,5 +1,5 @@
 
-\begin{algorithm}[]
+\begin{algorithm}[!ht]
   \caption{Covariance Matrix Adaptation Evolutionary Strategy (\mbox{})}
   \label{pseu:cmaes}
   \begin{algorithmic}[1]
@@ -9,14 +9,14 @@
     \[ c_{c}\approx 4/n, c_{\sigma}\approx 4/n, c_{1}\approx 2/n^2, c_{\mu}\approx \mu_{w}/n^2, c_{1} + c_{\mu}\leq 1\]
     \[ d_{\sigma}\approx 1+\sqrt{\frac{\mu_{w}}{n}}, 
     w_{i}=1...\lambda \quad tal\quad que \quad \mu_{w} = \frac{1}{\sum_{i=1}^{\mu}w_{i}^2}\approx 0.3\lambda\]
-    \WHILE{Condición de para no satisfecha}
+    \WHILE{Condición de parada no satisfecha}
       \STATE Muestreo (Ec.\ref{eq:1});
       \STATE Actualizar el valor medio (Ec. \ref{eq:2});
       \STATE Incremento de C (Ec. \ref{eq:3});
       \STATE Incremento de $\sigma$ (Ec. \ref{eq:4});
       \STATE Actualizar C (Ec. \ref{eq:5});
       \STATE Actualizar $\sigma$ (Ec. \ref{eq:6});
-      \STATE BusquedaGlobal(); \ref{sec:BG};
+      \STATE BusquedaGlobal(); secc. \ref{sec:BG};
       \IF{Reinicio necesario} \STATE {Reiniciar();} \ENDIF
     \ENDWHILE
     \RETURN Mejor solución obtenida
