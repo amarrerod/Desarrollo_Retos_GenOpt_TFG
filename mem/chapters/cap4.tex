@@ -64,8 +64,71 @@ Por último, en esta familia encontraremos funciones obtenidas a partir de la co
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Estudio de la Parametrización}
-\label{sec:PARAM}
+\section{Estudio de la Parametrización}\label{sec:PARAM}
+
+En esta sección trataremos el estudio de los parámetros empleados por cada uno de los algoritmos y como afectan al desempeño de los mismos. \\
+
+Un parámetro común a todos los algoritmos desarrollados es el tamaño de la población, y es por ello que, se empleará para contrastar el desempeño de los mismos hemos realizado experimentos con tamaños de población o $popsize = 20, 50, 75, 100$, a excepción del algoritmo SA (sección \ref{sec:SA}) que debido a que se trata de una meta-heurística de trayectoria se empleará únicamente un individuo.
+
+\subsection{OBL-CPSO}\label{sec:paramOBL_CPSO}
+
+En el diseño del algoritmo OBL-CPSO (sección \ref{sec:OBL-CPSO}) sólo se contempla la utilización de un parámetro, el tamaño de población. Es por ello, que los experimentos realizados con este algoritmo buscan encontrar el tamaño de población más adecuado para su rendimiento. A continuación, podemos ver una comparativa de los experimentos realizados con $popsize = 20, 50, 75, 100$: \\
+
+\begin{figure}[!ht]
+  \centering
+	%\includegraphics[scale=0.5]{images/final}
+	\captionsetup{justification=centering}
+  \caption{Comparativa del algoritmo OBL-CPSO con diferentes tamaños de población.}
+\end{figure}
+
+\subsection{CMA-ES}\label{sec:paramCMA_ES}
+
+El diseño del algoritmo CMA-ES, como detallamos en la sección \ref{sec:CMA}, sólo necesita la definición de dos parámetros iniciales para comenzar su ejecución, el tamaño de la población a emplear y el valor de sigma ($\sigma$) inicial. \\
+El tamaño de la población, como especificamos en el inicio de la sección, tomará los siguientes valores $popsize = 20, 50, 75, 100$. \\
+En cuanto al parámetro $\sigma$, los valores que tomará serán $\sigma = 0.3, 0.8, 2.0$. La elección de estos valores se basa en que el parámetro $\sigma$ determina la variación incluida en cada nueva generación de la población y teniendo en cuenta esto, unos valores de $\sigma$ pequeños como 0.3 y 0.8 harán que el algoritmo se comporte como una búsqueda local, y al contrario con valores grandes de $\sigma$ como 2.0 \cite{CMA1}. \\
+
+Para evaluar el rendimiento del algoritmo variando estos dos parámetros, hemos realizado un total de 12 experimentos, obteniendo los siguientes resultados:
+
+\begin{figure}[!ht]
+  \centering
+	%\includegraphics[scale=0.5]{images/final}
+	\captionsetup{justification=centering}
+  \caption{Comparativa del algoritmo CMA-ES.}
+\end{figure}
+
+\subsection{SA}\label{sec:paramSA}
+
+Por último, el algoritmo SA (sección \ref{sec:SA}) presenta únicamente un parámetro, la temperatura inicial. Según la literatura \cite{metabook}, inicialmente este parámetro debe tener un valor elevado, y es por ello, por lo que los valores con los que hemos evaluado el rendimiento de este algoritmo han sido $Temp_{0} = 500, 1000, 10000$. A continuación, podemos ver una comparativa de los resultados obtenidos. 
+
+\begin{figure}[!ht]
+  \centering
+	%\includegraphics[scale=0.5]{images/final}
+	\captionsetup{justification=centering}
+  \caption{Comparativa del algoritmo SA con diferentes valores de temperatura inicial.}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Análisis de Rendimiento}
-\label{sec:PERFORMANCE}
+\section{Análisis de Rendimiento}\label{sec:PERFORMANCE}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Clasificación en el Concurso GenOpt}\label{sec:Competition}
+
+Desde la organización del concurso GenOpt proponen varios criterios para clasificar los algoritmos enviados por los participantes. Estos criterios pueden ser:
+
+\begin{itemize}
+    	  	\item \textbf{High Jump}: Mejor valor obtenido en los puntos de control.
+    	  	\item \textbf{Target Shooting}: Éxito a la hora de alcanzar el óptimo global de la función.
+    	  	\item \textbf{Biathlon Score}: Media entre el High Jump y Target Shooting.
+\end{itemize}
+
+A la vista de los resultados obtenidos en el análisis de rendimiento decidimos emplear el algoritmo CMA-ES (sección \ref{sec:CMA}) para participar en la fase final del concurso. \\
+Con este algoritmo, el cual denominamos \textit{Hybrid Continuous Optimiser based on CMA-ES and a Global Neighbourhood Path Search (HCO-CMA-G)}, conseguimos la \textbf{tercera posición} en el ranking final según el parámetro \textbf{High Jump}, como podemos ver en la siguiente figura: 
+
+\begin{figure}[!ht]
+  \centering
+	\includegraphics[scale=0.5]{images/final}
+  \caption{Clasificación en el concurso GenOpt según High Jump.}
+\end{figure}
+
+\newpage

@@ -91,8 +91,8 @@ El pseudocódigo del algoritmo OBL-CPSO se muestra en la siguiente figura:
 \section{Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)}
 \label{sec:CMA}
 
-Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{CMA} es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales. 
-La característica principal del algoritmo es que en cada iteración se generan, a través de una Distribución Normal Multivariante en $\Re^{d}$, $\lambda$ individuos nuevos, y a partir de estos individuos realizar una serie de cálculos intermedios para actualizar la matriz de covarianza asociada a la distribución. \\  
+Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{CMA1, CMA2, CMA} es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales. 
+La característica principal del algoritmo es que en cada iteración se generan, a través de una Distribución Normal Multivariante en $\Re^{d}$, $\lambda$ individuos nuevos, y a partir de estos individuos realizar una serie de cálculos intermedios para actualizar la matriz de covarianza asociada a la distribución \cite{CMA1}. \\  
 El diseño del algoritmo CMA-ES no necesita un gran esfuerzo en la elección de los parámetros ya que es el algoritmo quién, internamente, se encarga de establecer los parámetros que utiliza, a excepción del tamaño de la población $\lambda$ que debe ser definido por el usuario. Sin embargo, esta estrategia interna que define los parámetros sí forma parte del diseño del algoritmo y es uno de los pilares esenciales del rendimiento del mismo. \\
 
 Las estrategias internas para definir los parámetros, estrategias de reinicio y los criterios de finalización hace que encontremos una gran cantidad de variantes del algoritmo CMA-ES puro. La estructura básica del algoritmo CMA-ES se puede dividir en las etapas descritas en las siguientes secciones: \\ 
