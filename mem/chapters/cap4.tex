@@ -4,7 +4,7 @@
 \section{Descripción de las Funciones Propuestas por el GenOpt}
 \label{sec:GENOPT}
 
-El concurso \textit{GenOpt} ha propuesto un total de \textbf{18 funciones} de dimensiones $D = 10, 30$ a optimizar. A partir de sus características, estas funciones se pueden agrupar en tres familias diferentes: 
+El concurso \textit{GenOpt} ha propuesto un total de \textbf{18 funciones} de dimensiones $D = 10, 30$ a optimizar, realizando \textbf{cien ejecuciones independientes} para cada una de ellas. A partir de sus características, estas funciones se pueden agrupar en tres familias diferentes: 
 
 \bigskip
 \subsection{Funciones GKLS}\label{sec:GKLS}
@@ -60,7 +60,7 @@ Por último, en esta familia encontraremos funciones obtenidas a partir de la co
 
 En esta sección trataremos el estudio de los parámetros empleados por cada uno de los algoritmos y como afectan al desempeño de los mismos. \\
 
-Un parámetro común a todos los algoritmos desarrollados es el tamaño de la población, y es por ello que, se empleará para contrastar el desempeño de los mismos hemos realizado experimentos con tamaños de población o $popsize = 20, 50, 75, 100$, a excepción del algoritmo SA (Sección \ref{sec:SA}) que debido a que se trata de una meta-heurística de trayectoria se empleará únicamente un individuo.
+Un parámetro común a todos los algoritmos desarrollados es el tamaño de la población, y es por ello que, se emplearán los mismos tamaños de población, $popsize = 20, 50, 75, 100$, para estudiar el rendimiento de cada algoritmo, a excepción del algoritmo SA (Sección \ref{sec:SA}) que debido a que se trata de una meta-heurística de trayectoria se empleará únicamente un individuo.
 
 \subsection{OBL-CPSO}\label{sec:paramOBL_CPSO}
 
@@ -70,6 +70,7 @@ En el diseño del algoritmo OBL-CPSO (sección \ref{sec:OBL-CPSO}) sólo se cont
     \resizebox{\textwidth}{!}{\begin{tabular}{LLLLLLLLLLLLLLLL}
     \toprule
       \multicolumn{3}{r}{OBL-CPSO-20} & \multicolumn{3}{r}{OBL-CPSO-50} & \multicolumn{3}{r}{OBL-CPSO-75} & \multicolumn{3}{r}{OBL-CPSO-100} \\
+      & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma\\
       \cmidrule(l){2-4} \cmidrule(l){5-7} \cmidrule(l){8-10} \cmidrule(l){11-13}
        \midrule
     f_{0} & 4.361e-01 & 2.041e-01 & 4.492e-01 & {\bf 3.937e-01} & {\bf 1.255e-01} & 4.193e-01 & 4.095e-01 & 1.364e-01 & 4.224e-01 & 1.228e+00 & 1.218e+00 & 2.404e-01 \\
@@ -95,6 +96,9 @@ f_{17} & 2.666e-01 & 2.286e-01 & 1.587e-01 & 2.049e-01 & 1.744e-01 & 1.091e-01 &
     \captionsetup{justification=centering}
     \caption{Comparativa del algoritmo OBL-CPSO con diferentes tamaños de población.}    
 \end{table}
+
+Como podemos observar, en negrita se muestran los mejores valores obtenidos para cada una de las funciones a optimizar 
+
 \newpage
 \subsection{CMA-ES}\label{sec:paramCMA_ES}
 
@@ -103,21 +107,48 @@ El diseño del algoritmo CMA-ES, como detallamos en la sección \ref{sec:CMA}, s
 El tamaño de la población, como especificamos en el inicio de la sección, tomará los siguientes valores $popsize = 20, 50, 75, 100$. \\
 En cuanto al parámetro $\sigma$, los valores que tomará serán $\sigma = 0.3, 0.8, 2.0$. La elección de estos valores se basa en que el parámetro $\sigma$ determina la variación incluida en cada nueva generación de la población y teniendo en cuenta esto, unos valores de $\sigma$ pequeños como 0.3 y 0.8 harán que el algoritmo se comporte como una búsqueda local, y al contrario, como una búsqueda global, con valores grandes de $\sigma$ como 2.0 \cite{CMA1}. \\
 
-A continuación podemos observar un diagrama de cajas y bigotes en el que se evalua el rendimiento de las instancias CMA\_ES-$2-50$, CMA\_ES-$2-100$ y CMA\_ES-$2-20$, en el que se puede apreciar que las instancias con $popsize = 50, 100$, superan claramente a la instancia $popsize = 20$ para dicha función.
+A continuación podemos observar una tabla en la muestran los resultados de la  evaluación el rendimiento de las instancias CMA\_ES-$2-50$, CMA\_ES-$0.3-50$ y CMA\_ES-$0.3-100$, mostrando para cada instancia los valores de media ($\mu$), mediana ($\tilde{x}$) y desviación típica ($\sigma$) para las 18 funciones propuestas por el concurso GenOpt. \\
 
 La nomenclatura utilizada es la siguiente: CMA\_ES-$\sigma-popsize$.
-%\begin{figure}[!ht]
-%    \centering
-%    \includegraphics[scale=0.8]{images/boxplot_CMA_ES_17}
-%    \captionsetup{justification=centering}
-%    \caption{Comparativa de las instancias CMA\_ES-$\sigma-popsize$ para la función 17.}
-%\end{figure}
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{\begin{tabular}{LLLLLLLLLLLLLLLL}
+    \toprule
+      \multicolumn{3}{r}{CMA\_ES-$2-50$} & \multicolumn{3}{r}{CMA\_ES-$0.3-50$} & \multicolumn{3}{r}{CMA\_ES-$0.8-50$} \\
+      & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma\\
+      \cmidrule(l){2-4} \cmidrule(l){5-7} \cmidrule(l){8-10} 
+       \midrule
+    f_{0} & {\bf 8.503e-01} & {\bf 1.000e+00} & 2.677e-01 & 6.503e+00 & 1.089e+00 & 2.677e-01 & 8.503e-01 & 1.000e+00 & 2.677e-01 \\
+f_{1} & {\bf 1.145e+00} & {\bf 1.121e+00} & 9.401e-02 & 1.145e+00 & 1.331e+00 & 9.401e-02 & 1.145e+00 & 1.121e+00 & 9.401e-02 \\
+f_{2} & {\bf 9.650e-01} & {\bf 1.000e+00} & 1.102e-01 & 6.890e-01 & 1.120e+00 & 1.102e-01 & 9.650e-01 & 1.000e+00 & 1.102e-01 \\
+f_{3} & {\bf 1.145e+00} & {\bf 1.127e+00} & 9.699e-02 & 1.175e+00 & 1.197e+00 & 9.699e-02 & 1.145e+00 & 1.127e+00 & 9.699e-02 \\
+f_{4} & {\bf 9.568e-01} & {\bf 1.000e+00} & 1.375e-01 & 7.544e-01 & 1.000e+00 & 1.375e-01 & 9.568e-01 & 1.000e+00 & 1.375e-01 \\
+f_{5} & {\bf 1.139e+00} & {\bf 1.107e+00} & 9.068e-02 & 2.177e+00 & 1.107e+00 & 9.068e-02 & 1.139e+00 & 1.107e+00 & 9.068e-02 \\
+f_{6} & {\bf 7.098e-03} & {\bf 2.675e-03} & 1.102e-02 & 6.068e-03 & 2.895e-03 & 1.102e-02 & 7.098e-03 & 2.675e-03 & 1.102e-02 \\
+f_{7} & {\bf 3.485e+00} & {\bf 3.206e+00} & 1.737e+00 & 4.785e+00 & 3.206e+00 & 1.737e+00 & 3.485e+00 & 3.206e+00 & 1.737e+00 \\
+f_{8} & {\bf 1.114e-02} & {\bf 3.920e-03} & 2.502e-02 & 1.184e-02 & 3.500e-03 & 2.502e-02 & 1.114e-02 & 3.920e-03 & 2.502e-02 \\
+f_{9} & {\bf 1.801e+00} & {\bf 1.713e+00} & 8.352e-01 & 2.881e+00 & 1.503e+00 & 8.352e-01 & 1.801e+00 & 1.713e+00 & 8.352e-01 \\
+f_{10} & {\bf 2.323e-02} & {\bf 2.214e-02} & 2.532e-02 & 1.393e-02 & 2.124e-02 & 2.532e-02 & 2.323e-02 & 2.214e-02 & 2.532e-02 \\
+f_{11} & {\bf 5.283e-02} & {\bf 5.061e-02} & 1.399e-02 & 3.883e-02 & 5.031e-02 & 1.399e-02 & 5.283e-02 & 5.061e-02 & 1.399e-02 \\
+f_{12} & {\bf 2.242e-04} & {\bf 1.147e-04} & 5.236e-04 & 4.442e-04 & 1.147e-04 & 5.236e-04 & 2.242e-04 & 1.147e-04 & 5.236e-04 \\
+f_{13} & {\bf 3.018e-02} & {\bf 2.998e-02} & 7.994e-03 & 2.018e-02 & 2.998e-02 & 7.994e-03 & 3.018e-02 & 2.998e-02 & 7.994e-03 \\
+f_{14} & {\bf 1.443e-04} & {\bf 2.946e-05} & 3.504e-04 & 1.443e-04 & 2.946e-05 & 3.504e-04 & 1.443e-04 & 2.946e-05 & 3.504e-04 \\
+f_{15} & {\bf 4.870e-02} & {\bf 4.838e-02} & 1.111e-02 & 4.870e-02 & 4.838e-02 & 1.111e-02 & 4.870e-02 & 4.838e-02 & 1.111e-02 \\
+f_{16} & {\bf 9.820e-04} & {\bf 2.520e-04} & 5.633e-03 & 9.820e-04 & 2.520e-04 & 5.633e-03 & 9.820e-04 & 2.520e-04 & 5.633e-03 \\
+f_{17} & {\bf 3.485e-02} & {\bf 3.375e-02} & 9.540e-03 & 3.485e-02 & 3.375e-02 & 9.540e-03 & 3.485e-02 & 3.375e-02 & 9.540e-03 \\
+    \bottomrule
+    \end{tabular}}
+    \captionsetup{justification=centering}
+    \caption{Comparativa de algunas de las instancias CMA\_ES-$\sigma-popsize$.}    
+\end{table}
+
+Como podemos observar, los resultados destacados en negrita muestran la mejor configuración, CMA\_ES-$2-50$, de las tres presentadas aunque, estos resultados son idénticos a los obtenidos con la configuración CMA\_ES-$0.8-50$. Esto es así debido a la estratégia de reinicio empleada en nuestro algoritmo, la cual define $\sigma = 2$ cuando es empleada.
 
 \newpage
 
 \subsection{SA}\label{sec:paramSA}
 
-Por último, el algoritmo SA (sección \ref{sec:SA}) presenta únicamente un parámetro, la temperatura inicial. Según la literatura \cite{metabook}, inicialmente este parámetro debe tener un valor elevado, y es por ello, por lo que los valores con los que hemos evaluado el rendimiento de este algoritmo han sido $Temp_{0} = 500, 1000, 10000$. A continuación, podemos ver una comparativa del valor de error obtenido por cada experimento en cada una de las funciones propuestas por el concurso GenOpt. 
+Por último, el algoritmo SA (sección \ref{sec:SA}) presenta únicamente un parámetro, la temperatura inicial. Según la literatura \cite{metabook}, inicialmente este parámetro debe tener un valor elevado, y es por ello, por lo que los valores con los que hemos evaluado el rendimiento de este algoritmo han sido $Temp_{0} = 500, 1000, 10000$. A continuación, podemos ver una comparativa del \textbf{valor de error} obtenido por cada experimento en cada una de las funciones propuestas por el concurso GenOpt. La nomenclatura empleada es la siguiente: SA-$TEMP_{0}$.
 
 \begin{table}[!ht]
     \centering
@@ -149,32 +180,38 @@ f_{17} & 1.000e+00 & \leftrightarrow & 1.000e+00 & \leftrightarrow & 1.000e+00 \
     \caption{Comparativa del algoritmo SA con diferentes valores de temperatura inicial.}    
 \end{table}
 
-\subsection{Comparativa de Rendimiento entre Algoritmos}
+\newpage
+
+\subsection{Comparativa de Rendimiento entre Algoritmos}\label{sec:compALL}
+
+En la siguiente tabla, se presenta una comparativa de los valores media ($\mu$), mediana ($\tilde{x}$) y desviación típica ($\sigma$) de las mejores configuraciones conseguidas con cada uno de los algoritmos implementados. Como podemos apreciar, el algoritmo CMA-ES \cite{CMA} (Sección \ref{sec:CMA}) consigue los mejores resultados para las 18 funciones propuestas por el concurso GenOpt. Debido a estos resultados, el algoritmo CMA-ES fue escogido para competir en la fase final del concurso.
+
 \begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{\begin{tabular}{LLLLLLLLLL}
     \toprule
-     \multicolumn{3}{r}{CMA\_ES-$2-50$} & \multicolumn{3}{r}{SA-500} & \multicolumn{3}{r}{OBL-CPSO-75} \\
+     \multicolumn{3}{r}{CMA\_ES-$2-50$} & \multicolumn{3}{r}{OBL-CPSO-75} & \multicolumn{3}{r}{SA-500} \\
+     & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma & \mu & \tilde{x} & \sigma\\
      \cmidrule(l){2-4} \cmidrule(l){5-7} \cmidrule(l){8-10}
        \midrule
-    f_{0} & {\bf 8.503e-01} & {\bf 1.000e+00} & 2.677e-01 & 8.503e-01 & 1.000e+00 & 2.677e-01 & 8.503e-01 & 1.000e+00 & 2.677e-01 \\
-f_{1} & {\bf 1.145e+00} & {\bf 1.121e+00} & 9.401e-02 & 1.145e+00 & 1.121e+00 & 9.401e-02 & 1.145e+00 & 1.121e+00 & 9.401e-02 \\
-f_{2} & {\bf 9.650e-01} & {\bf 1.000e+00} & 1.102e-01 & 9.650e-01 & 1.000e+00 & 1.102e-01 & 9.650e-01 & 1.000e+00 & 1.102e-01 \\
-f_{3} & {\bf 1.145e+00} & {\bf 1.127e+00} & 9.699e-02 & 1.145e+00 & 1.127e+00 & 9.699e-02 & 1.145e+00 & 1.127e+00 & 9.699e-02 \\
-f_{4} & {\bf 9.568e-01} & {\bf 1.000e+00} & 1.375e-01 & 9.568e-01 & 1.000e+00 & 1.375e-01 & 9.568e-01 & 1.000e+00 & 1.375e-01 \\
-f_{5} & {\bf 1.139e+00} & {\bf 1.107e+00} & 9.068e-02 & 1.139e+00 & 1.107e+00 & 9.068e-02 & 1.139e+00 & 1.107e+00 & 9.068e-02 \\
-f_{6} & {\bf 7.098e-03} & {\bf 2.675e-03} & 1.102e-02 & 7.098e-03 & 2.675e-03 & 1.102e-02 & 7.098e-03 & 2.675e-03 & 1.102e-02 \\
-f_{7} & {\bf 3.485e+00} & {\bf 3.206e+00} & 1.737e+00 & 3.485e+00 & 3.206e+00 & 1.737e+00 & 3.485e+00 & 3.206e+00 & 1.737e+00 \\
-f_{8} & {\bf 1.114e-02} & {\bf 3.920e-03} & 2.502e-02 & 1.114e-02 & 3.920e-03 & 2.502e-02 & 1.114e-02 & 3.920e-03 & 2.502e-02 \\
-f_{9} & {\bf 1.801e+00} & {\bf 1.713e+00} & 8.352e-01 & 1.801e+00 & 1.713e+00 & 8.352e-01 & 1.801e+00 & 1.713e+00 & 8.352e-01 \\
-f_{10} & {\bf 2.323e-02} & {\bf 2.214e-02} & 2.532e-02 & 2.323e-02 & 2.214e-02 & 2.532e-02 & 2.323e-02 & 2.214e-02 & 2.532e-02 \\
-f_{11} & {\bf 5.283e-02} & {\bf 5.061e-02} & 1.399e-02 & 5.283e-02 & 5.061e-02 & 1.399e-02 & 5.283e-02 & 5.061e-02 & 1.399e-02 \\
-f_{12} & {\bf 2.242e-04} & {\bf 1.147e-04} & 5.236e-04 & 2.242e-04 & 1.147e-04 & 5.236e-04 & 2.242e-04 & 1.147e-04 & 5.236e-04 \\
-f_{13} & {\bf 3.018e-02} & {\bf 2.998e-02} & 7.994e-03 & 3.018e-02 & 2.998e-02 & 7.994e-03 & 3.018e-02 & 2.998e-02 & 7.994e-03 \\
-f_{14} & {\bf 1.443e-04} & {\bf 2.946e-05} & 3.504e-04 & 1.443e-04 & 2.946e-05 & 3.504e-04 & 1.443e-04 & 2.946e-05 & 3.504e-04 \\
-f_{15} & {\bf 4.870e-02} & {\bf 4.838e-02} & 1.111e-02 & 4.870e-02 & 4.838e-02 & 1.111e-02 & 4.870e-02 & 4.838e-02 & 1.111e-02 \\
-f_{16} & {\bf 9.820e-04} & {\bf 2.520e-04} & 5.633e-03 & 9.820e-04 & 2.520e-04 & 5.633e-03 & 9.820e-04 & 2.520e-04 & 5.633e-03 \\
-f_{17} & {\bf 3.485e-02} & {\bf 3.375e-02} & 9.540e-03 & 3.485e-02 & 3.375e-02 & 9.540e-03 & 3.485e-02 & 3.375e-02 & 9.540e-03 \\
+    f_{0} & {\bf 8.503e-01} & {\bf 1.000e+00} & 2.677e-01 & 4.095e-01 & 1.364e-01 & 4.224e-01 & 3.875e+00 & 3.731e+00 & 8.967e-01\\
+f_{1} & {\bf 1.145e+00} & {\bf 1.121e+00} & 9.401e-02 & 1.403e+00 & 1.351e+00 & 2.047e-01 & 1.065e+01 & 1.052e+01 & 1.439e+00\\
+f_{2} & {\bf 9.650e-01} & {\bf 1.000e+00} & 1.102e-01 & 7.968e-01 & 1.004e+00 & 3.407e-01 & 3.878e+00 & 3.731e+00 & 8.982e-01\\
+f_{3} & {\bf 1.145e+00} & {\bf 1.127e+00} & 9.699e-02 & 1.373e+00 & 1.350e+00 & 1.722e-01 & 1.065e+01 & 1.052e+01 & 1.439e+00\\
+f_{4} & {\bf 9.568e-01} & {\bf 1.000e+00} & 1.375e-01 & 8.439e-01 & 1.004e+00 & 3.219e-01 & 9.568e-01 & 1.000e+00 & 1.375e-01 \\
+f_{5} & {\bf 1.139e+00} & {\bf 1.107e+00} & 9.068e-02 & 1.423e+00 & 1.357e+00 & 2.284e-01 & 1.064e+01 & 1.050e+01 & 1.435e+00\\
+f_{6} & {\bf 7.098e-03} & {\bf 2.675e-03} & 1.102e-02 & 4.691e-01 & 2.570e-01 & 4.897e-01 & 1.373e+01 & 1.227e+01 & 6.326e+00\\
+f_{7} & {\bf 3.485e+00} & {\bf 3.206e+00} & 1.737e+00 & 9.134e+00 & 8.482e+00 & 3.717e+00 & 4.560e+01 & 4.423e+01 & 1.053e+01\\
+f_{8} & {\bf 1.114e-02} & {\bf 3.920e-03} & 2.502e-02 & 3.449e-01 & 2.537e-01 & 3.115e-01 & 6.038e+00 & 6.183e+00 & 1.809e+00\\
+f_{9} & {\bf 1.801e+00} & {\bf 1.713e+00} & 8.352e-01 & 4.720e+00 & 4.588e+00 & 1.643e+00 & 1.903e+01 & 1.891e+01 & 3.118e+00\\
+f_{10} & {\bf 2.323e-02} & {\bf 2.214e-02} & 2.532e-02 & 3.874e-03 &  2.688e-03 & 3.495e-03 & 1.270e-01 &   5.255e-02  & 2.558e-01\\
+f_{11} & {\bf 5.283e-02} & {\bf 5.061e-02} & 1.399e-02 & 4.151e-02 &  3.904e-02 & 1.285e-02 & 4.264e+00 &   1.808e-01  & 2.459e+01\\
+f_{12} & {\bf 2.242e-04} & {\bf 1.147e-04} & 5.236e-04 & 3.093e-02 & 2.092e-02 & 3.662e-02 & 5.330e+00 &   5.016e+00  & 2.499e+00\\
+f_{13} & {\bf 3.018e-02} & {\bf 2.998e-02} & 7.994e-03 & 8.200e-02 & 8.032e-02 & 2.643e-02 & 2.689e+00 &   2.567e+00  & 1.265e+00\\
+f_{14} & {\bf 1.443e-04} & {\bf 2.946e-05} & 3.504e-04 & 3.049e-02 &  1.543e-02 & 4.289e-02 & 8.964e+00 &   8.338e+00  & 4.235e+00\\
+f_{15} & {\bf 4.870e-02} & {\bf 4.838e-02} & 1.111e-02 & 1.196e-01 &  1.115e-01 & 4.406e-02 & 1.009e+01 &   8.802e+00  & 5.327e+00\\\
+f_{16} & {\bf 9.820e-04} & {\bf 2.520e-04} & 5.633e-03 & 1.201e-02 &  1.052e-02 & 8.260e-03  & 4.049e+00 &   3.340e+00  & 3.172e+00\\
+f_{17} & {\bf 3.485e-02} & {\bf 3.375e-02} & 9.540e-03 & 1.845e-01 &  1.687e-01 & 8.040e-02 & 1.603e+01 &   1.465e+01  & 5.702e+00\\
     \bottomrule
     \end{tabular}}
     \captionsetup{justification=centering}
@@ -192,8 +229,9 @@ Desde la organización del concurso GenOpt proponen varios criterios para clasif
     	  	\item \textbf{Target Shooting}: Éxito a la hora de alcanzar el óptimo global de la función.
     	  	\item \textbf{Biathlon Score}: Media entre el High Jump y Target Shooting.
 \end{itemize}
+Para obtener más detalles sobre como se calculan estas métricas, se recomienda la lectura del Manifesto del GenOpt\footnote{Dirección desde la que se puede obtener el Manifesto del concurso GenOpt: http://www.genopt.org/genopt.pdf.}.
 
-A la vista de los resultados obtenidos en las diversas pruebas llevadas a cabo en el análisis de rendimiento, decidimos emplear el algoritmo CMA-ES (sección \ref{sec:CMA}) para participar en la fase final del concurso. \\
+A la vista de los resultados obtenidos en las diversas pruebas llevadas a cabo en el análisis de rendimiento \ref{sec:compALL}, decidimos emplear el algoritmo CMA-ES (sección \ref{sec:CMA}) para participar en la fase final del concurso. \\
 Con este algoritmo, el cual denominamos \textit{Hybrid Continuous Optimiser based on CMA-ES and a Global Neighbourhood Path Search (HCO-CMA-G)}, conseguimos la \textbf{tercera posición} en el ranking final según el parámetro \textbf{High Jump}, como podemos ver en la siguiente figura: 
 
 \begin{figure}[!ht]

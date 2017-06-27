@@ -7,10 +7,7 @@
 \label{sec:DESCRIPTION}
 
 En este Trabajo de Fin de Grado, se propone el diseño y análisis de diversas técnicas algorítmicas para la resolución de problemas definidos en el ámbito de un concurso/competición de optimización.
-	En la actualidad,  muchos de los problemas del mundo real se pueden formular como problemas de optimización con variables de decisión cuyos valores varían en un dominio continuo. Es por eso que podemos encontrar una gran cantidad de competiciones en esta materia que fomentan la cooperación y la investigación en el campo de la computación. Aunque son muchas las técnicas que pueden ser empleadas para resolver este tipo de problemas, se ha probado que la utilización de metaheurísticas y otras técnicas de computación evolutiva (EC, del inglés, Evolutionary Computation), como la familia de algoritmos evolutivos, presentan numerosas y exclusivas ventajas como:
-Robustez y fiabilidad.
-Capacidad de búsqueda global.
-Abstracción del dominio del problema a resolver.
+	En la actualidad,  muchos de los problemas del mundo real se pueden formular como problemas de optimización con variables de decisión cuyos valores varían en un dominio continuo. Es por eso que podemos encontrar una gran cantidad de competiciones en esta materia que fomentan la cooperación y la investigación en el campo de la computación. Aunque son muchas las técnicas que pueden ser empleadas para resolver este tipo de problemas, se ha probado que la utilización de metaheurísticas y otras técnicas de computación evolutiva (EC, del inglés, Evolutionary Computation), como la familia de algoritmos evolutivos, presentan numerosas y exclusivas ventajas como robustez y fiabilidad, capacidad de búsqueda global y abstracción del dominio del problema a resolver.
 
 Además de las ventajas anteriormente mencionadas, las técnicas de computación evolutiva nos proporcionan otras características como pueden ser la facilidad con la que pueden ser implementadas y la posibilidad de paralelizarlas de un modo relativamente sencillo.
 	Por lo tanto, el principal objetivo del presente Trabajo de Fin de Grado es el diseño, desarrollo y análisis de la parametrización de diversos algoritmos evolutivos y otras técnicas metaheurísticas en el ámbito de una competición de optimización continua. 
@@ -20,19 +17,19 @@ Además de las ventajas anteriormente mencionadas, las técnicas de computación
 
 Como se ha indicado en el apartado anterior, actualmente existen una gran cantidad de competiciones de optimización organizadas en diferentes congresos como son:
 \begin{itemize}
-  \item Congress on Evolutionary Computation - CEC 2017.
-  \item Genetic and Evolutionary Computation Conference - GECCO 2017.
-  \item Global Trajectory Optimisation Competition - GTOC.
-  \item International Conference on Evolutionary Multi-Criterion Optimization - EMO 2017.
-  \item Generalization-based Contest in Global Optimization - GENOPT.
+  \item \textbf{Congress on Evolutionary Computation - CEC 2017}: es un congreso anual sobre computación evolutiva que además propone varias competiciones como Real-Parameter Single Objective Optimization o Evolutionary Multi-task Optimization entre otros.
+  \item \textbf{Genetic and Evolutionary Computation Conference - GECCO 2017}: propone varias competiciones como son Black Box Optimization Competition u Optimisation of Problems with Multiple Interdependent Components entre otros. \footnote{Para obtener más información acerca de GECCO http://gecco-2017.sigevo.org/index.html/HomePage}.
+  \item \textbf{Global Trajectory Optimisation Competition - GTOC}: es una competición 
+  \item \textbf{International Conference on Evolutionary Multi-Criterion Optimization - EMO 2017}.
+  \item \textbf{Generalization-based Contest in Global Optimization - GenOpt}.
 \end{itemize}
 
-En concreto, este Trabajo de Fin de Grado se basará en la resolución de los problemas de optimización global continua descritos en GENOPT. En esta competición se propone la minimización de 18 funciones con 10 o 30 variables de decisión, las cuales se dividen en tres familias diferentes: funciones GKLS, funciones de benchmark clásicas transformadas, y funciones compuestas.
+En concreto, este Trabajo de Fin de Grado se basará en la resolución de los problemas de optimización global continua descritos en GenOpt. En esta competición se propone la minimización de 18 funciones con 10 o 30 variables de decisión, las cuales se dividen en tres familias diferentes: funciones GKLS, funciones de benchmark clásicas transformadas, y funciones compuestas.
 La primera familia de funciones se obtiene mediante un generador GKLS \cite{GKLS} que permite obtener tres clases de funciones con los valores mínimos locales y globales conocidos para realizar una optimización global multidimensional de tipo “box-constrained”, dónde el espacio de búsqueda se encuentra definido por dos límites, un límite inferior y otro límite superior, para cada una de las variables de decisión.
 La segunda familia de funciones se basan en problemas de benchmark de optimización continua clásicos, de dificultad variable.
 \newline
 Por último, la última familia se obtiene realizando una composición de funciones pertenecientes a la segunda familia, generando seis tipos diferentes de problemas.	
-Se puede obtener más información al respecto en el Manifesto GENOPT \footnote{Dirección desde la que se puede obtener el Manifesto del concurso GenOpt: http://www.genopt.org/genopt.pdf.}.
+Se puede obtener más información al respecto en el Manifesto GenOpt \footnote{Dirección desde la que se puede obtener el Manifesto del concurso GenOpt: http://www.genopt.org/genopt.pdf.}.
 Por otra parte, como se comentó en el apartado de introducción, se estudiarán diversos algoritmos evolutivos y otro tipo de metaheurísticas para la resolución de los problemas planteados. En este caso, cabe destacar los algoritmos Particle Swarm Optimization (PSO) \cite{GPSO}, Differential Evolution (DE) \cite{metabook} y Covariance Matrix Adaptation Evolution Strategy (CMA-ES) \cite{CMA}, entre otros. Otro posible objeto de estudio serán diversas técnicas de inicialización de algoritmos, principalmente, la familia de técnicas Opposition-Based Learning (OBL) \cite{obl2}.
 
 
