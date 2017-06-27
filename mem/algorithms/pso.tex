@@ -10,7 +10,7 @@
       \ENDFOR
       \FORALL{$p_{i}$ en S}
        \FORALL{$d_{i}$ en D}
-       \STATE $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\
+       \STATE $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\ Rnd(0,1) devuelve un número generado aleatoriamente en el rango [0, 1]
             $ x_{i,d} = x_{i,d} + v_{i,d}$; \\
        \ENDFOR
       \ENDFOR

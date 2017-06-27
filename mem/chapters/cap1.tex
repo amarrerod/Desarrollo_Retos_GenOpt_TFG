@@ -28,9 +28,11 @@ Como se ha indicado en el apartado anterior, actualmente existen una gran cantid
 \end{itemize}
 
 En concreto, este Trabajo de Fin de Grado se basará en la resolución de los problemas de optimización global continua descritos en GENOPT. En esta competición se propone la minimización de 18 funciones con 10 o 30 variables de decisión, las cuales se dividen en tres familias diferentes: funciones GKLS, funciones de benchmark clásicas transformadas, y funciones compuestas.
-Las primera familia de funciones se obtiene mediante un generador GKLS que permite obtener tres clases de funciones con los valores mínimos locales y globales conocidos para realizar una optimización global multidimensional de tipo “box-constrained”.
+La primera familia de funciones se obtiene mediante un generador GKLS \cite{GKLS} que permite obtener tres clases de funciones con los valores mínimos locales y globales conocidos para realizar una optimización global multidimensional de tipo “box-constrained”, dónde el espacio de búsqueda se encuentra definido por dos límites, un límite inferior y otro límite superior, para cada una de las variables de decisión.
 La segunda familia de funciones se basan en problemas de benchmark de optimización continua clásicos, de dificultad variable.
 \newline
 Por último, la última familia se obtiene realizando una composición de funciones pertenecientes a la segunda familia, generando seis tipos diferentes de problemas.	
-Se puede obtener más información al respecto en el Manifesto GENOPT.
-Por otra parte, como se comentó en el apartado de introducción, se estudiarán diversos algoritmos evolutivos y otro tipo de metaheurísticas para la resolución de los problemas planteados. En este caso, cabe destacar los algoritmos Particle Swarm Optimization (PSO), Differential Evolution (DE) y Covariance Matrix Adaptation Evolution Strategy (CMA-ES), entre otros. Otro posible objeto de estudio serán diversas técnicas de inicialización de algoritmos, principalmente, la familia de técnicas Opposition-Based Learning (OBL).
+Se puede obtener más información al respecto en el Manifesto GENOPT \footnote{Dirección desde la que se puede obtener el Manifesto del concurso GenOpt: http://www.genopt.org/genopt.pdf.}.
+Por otra parte, como se comentó en el apartado de introducción, se estudiarán diversos algoritmos evolutivos y otro tipo de metaheurísticas para la resolución de los problemas planteados. En este caso, cabe destacar los algoritmos Particle Swarm Optimization (PSO) \cite{GPSO}, Differential Evolution (DE) \cite{metabook} y Covariance Matrix Adaptation Evolution Strategy (CMA-ES) \cite{CMA}, entre otros. Otro posible objeto de estudio serán diversas técnicas de inicialización de algoritmos, principalmente, la familia de técnicas Opposition-Based Learning (OBL) \cite{obl2}.
+
+

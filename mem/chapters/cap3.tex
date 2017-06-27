@@ -8,22 +8,22 @@
 \label{sec:OBL}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Opposition-based Learning (OBL) \cite{obl, obl2, OPSO, OPSO2, OPSO3} es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización. Cuando evaluamos una solución X candidata para un problema dado, simultáneamente  
- calcularemos la solución opuesta $\overline{X}$, consiguiendo así una mayor exploración del espacio de búsqueda $\Omega$ en busca del óptimo global \cite{obl}. Asimismo, podemos encontrar diversas variantes a la estrategia tradicional de OBL como pueden ser: Quasi-opposition-based Learning (QOBL), Quasi-reflected Opposition-based Learning (QROBL) \cite{Segredo2017_2}.
+Opposition-based Learning (OBL) \cite{obl, obl2, OPSO, OPSO2, OPSO3} es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización. Cuando evaluamos una solución X, perteneciente al conjunto de soluciones S, candidata para un problema dado, simultáneamente  
+ calcularemos la solución opuesta $\overline{X}$, consiguiendo así una mayor exploración del espacio de búsqueda $\Omega$ en busca del óptimo global \cite{obl}. Asimismo, podemos encontrar diversas variantes a la estrategia tradicional de OBL como pueden ser Quasi-opposition-based Learning (QOBL) o Quasi-reflected Opposition-based Learning (QROBL) \cite{Segredo2017_2}.
 
 Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma \cite{obl}: \\
  \begin{equation}
      \overline{x} = a + b - x  \\
  \end{equation}
 
-Análogamente, para el caso de optimizar una función n-dimensional la solución opuesta se calcularía de la siguiente forma: \\
+Análogamente, para el caso de optimizar una función con $D$ dimensiones o variables de decisión, la solución opuesta se calcularía de la siguiente forma: \\
 
- Sea $ P(x_{1}, x_{2},...,x_{n}) $ un punto dentro de un sistema de coordenadas n-dimensional con $ x_{1},...,x_{n} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$ \cite{obl}. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{n}}$ donde:\\
+ Sea $ P(x_{1}, x_{2},...,x_{d}) $ un punto dentro de un sistema de coordenadas n-dimensional con $ x_{1},...,x_{d} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$ \cite{obl}. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{d}}$ donde:\\
 \begin{equation}
-    \overline{x_{i}} = a_{i} + b_{i} - x_{i} \quad i = 1,...,n \\
+    \overline{x_{i}} = a_{i} + b_{i} - x_{i} \quad i = 1,...,d \\
 \end{equation}
 
-En nuestro desarrollo hemos empleado este concepto en varios procesos, como puede ser el proceso de inicialización de los individuos que formarán parte de la primera población o bien, tras cada iteración del algoritmo como medida de diversificación. 
+En nuestro desarrollo hemos empleado este concepto en varios procesos, como puede ser el proceso de inicialización de los individuos que formarán parte de la población inicial de soluciones $S$ o bien, tras cada iteración del algoritmo como medida de diversificación. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Búsqueda Global}\label{sec:BG}
@@ -35,12 +35,12 @@ En ciencias de la computación, una búsqueda global (Global Search) es un méto
 %
 El funcionamiento básico de una búsqueda global se basa en que el algoritmo se mueve dentro del espacio de búsqueda explorando todas las soluciones factibles y aplicando cambios a cada una de ellas hasta encontrar una solución óptima. 
 
-Para nuestro trabajo, hemos diseñado una búsqueda global que \textbf{se aplicará como último paso en cada iteración de los algoritmos} que hemos desarrollado con el objetivo de obtener una mayor diversificación y escapar de los posibles óptimos locales. En primer lugar, el procedimiento calculará el individuo centroide de la población. El centroide de un conjunto n-dimensional de $k$ elementos se define como:
+Para nuestro trabajo, hemos diseñado una búsqueda global que \textbf{se aplicará como último paso en cada iteración de los algoritmos} que hemos desarrollado con el objetivo de obtener una mayor diversificación y escapar de los posibles óptimos locales. En primer lugar, el procedimiento calculará el individuo centroide de la población. El centroide de un conjunto de $k$ elementos, tal que $k = \left | S \right |$, se define como:
 \begin{equation}\label{centroide}
     C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
 \end{equation}
 
-Para nuestro caso particular, debemos tener en cuenta que cada uno de nuestros elementos $x_{i}$ representan una solución factible a nuestro problema con $d$ variables cada uno. Es por ello que, el individuo centroide se calculará de la siguiente manera: 
+Para nuestro caso particular, debemos tener en cuenta que cada uno de nuestros elementos $x_{i}$ representan una solución factible a nuestro problema con $D$ variables cada uno. Es por ello que, el individuo centroide se calculará de la siguiente manera: 
 \input{algorithms/centroid.tex}
 Seguidamente, pasaremos a explorar la población de individuos aplicando pequeñas modificaciones a cada uno de ellos para obtener nuevos individuos \textit{hijos}. Si estos individuos mejoran a sus ancestros serán incluidos dentro del conjunto de soluciones S y continuaremos aplicando modificaciones a su ancestro hasta que no se produzca mejora en su descendencia. En otro caso, serán descartados.
 Finalmente, devolveremos una nueva población con los $|S|$ mejores individuos encontrados entre padres e hijos. \\
@@ -56,7 +56,7 @@ A continuación, podemos ver el pseudocódigo de nuestra aproximación de búsqu
 \subsection{Particle Swarm Optimization}
 Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es una estrategia de optimización que ha demostrado ser muy eficiente en problemas de optimización global continua. Se basa en simular el conjunto de soluciones candidatas a un problema dado como un enjambre de partículas que se mueven dentro de un espacio de búsqueda definido. Dado que las partículas se mueven, estas poseen una posición \textit{x} y una velocidad $\overrightarrow{v}$ en cada instante \textit{t} de ejecución del algoritmo. La posición \textit{x} representa los valores que toman las diferentes variables dentro de una solución y, la velocidad $\overrightarrow{v}$, determinará la dirección y la rapidez con la que la partícula se desplazará por el espacio de búsqueda, es decir, el factor de modificación para cada una de las variables de decisión. Aparte de estas características, cada partícula tiene la capacidad de recordar su mejor posición alcanzada durante la ejecución del algoritmo, y para cada partícula $p_{i}$ la denotaremos como $pb_{i}$ \cite{metabook}. Esto nos permite evaluar si el movimiento de una partícula mejora la solución actual o por el contrario es mejor permanecer en la posición actual. \\
 
-Por otra parte, en el algoritmo PSO también se tiene en cuenta una partícula denominada \textit{global best $(gb)$} en la que se almacena la mejor posición histórica alcanzada por una partícula dentro del enjambre. Estas dos posiciones $pb_{i}$ y \textit{gb} son usadas en cada iteración del algoritmo para atraer el movimiento de las partículas hacia esas posiciones, consiguiendo así que el algoritmo PSO converga rápidamente hacia las soluciones óptimas. \\
+Por otra parte, en el algoritmo PSO también se tiene en cuenta una partícula denominada \textit{global best $(gb)$} en la que se almacena la mejor posición histórica alcanzada por una partícula dentro del enjambre. Estas dos posiciones $pb_{i}$ y \textit{gb} son usadas en cada iteración del algoritmo para atraer el movimiento de las partículas hacia esas posiciones, consiguiendo así que el algoritmo PSO converja rápidamente hacia las posibles soluciones óptimas. \\
 A continuación, se muestra el esquema básico del algoritmo PSO: 
 \input{algorithms/pso.tex}
 \newpage
@@ -66,7 +66,7 @@ A continuación, se muestra el esquema básico del algoritmo PSO:
 \subsection{OBL-CPSO}
 En esta ocasión, el algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} desarrollado incluye dos modificaciones sobre el esquema básico del algoritmo PSO como son Opposition-based Learning, detallado en la sección \ref{sec:OBL}, y un procedimiento de competición entre las partículas que conforman el enjambre. \\
 
-El procedimiento de competición se basa en escoger tres partículas dentro del enjambre aleatoriamente, hacerlas competir entre ellas, mediante su valor de función objetivo, obteniendo un partícula ganadora, otra perdedora y una partícula neutra para, posteriormente, eliminarlas del enjambre. Para un enjambre de tamaño N, en cada iteración del algoritmo se realizarán N/3 competiciones \cite{oblcpso}. Tras cada competición, la partícula ganadora pasará directamente a la siguiente iteración del algoritmo y la partícula perdedora pasará también a la siguiente iteración tras aprender de la partícula ganadora, es decir, la partícula ganadora atrae a la partícula perdedora hacia su posición. La partícula neutral será la escogida para utilizarla en la estrategia de OBL y seguidamente pasar a la siguiente iteración, tratando, de este modo, de mejorar la capacidad de exploración del algoritmo \cite{oblcpso}. \\
+El procedimiento de competición se basa en escoger tres partículas dentro del enjambre aleatoriamente, hacerlas competir entre ellas, mediante su valor de función objetivo, obteniendo un partícula ganadora, otra perdedora y una partícula neutra para, posteriormente, eliminarlas del enjambre. Para un enjambre de tamaño N, en cada iteración del algoritmo se realizarán N/3 competiciones \cite{oblcpso}. Tras cada competición, la partícula ganadora pasará directamente a la siguiente iteración del algoritmo y la partícula perdedora pasará también a la siguiente iteración tras aprender de la partícula ganadora, es decir, la partícula ganadora atrae a la partícula perdedora hacia su posición. La partícula neutral será la escogida para utilizarla en la estrategia de OBL y seguidamente pasar a la siguiente iteración, tratando de mejorar, de este modo, la capacidad de exploración del algoritmo \cite{oblcpso}. \\
 
 La partícula perdedora y la partícula neutral van a modificar su posición y su velocidad siguiendo las siguientes ecuaciones:
 
@@ -92,7 +92,7 @@ El pseudocódigo del algoritmo OBL-CPSO se muestra en la siguiente figura:
 \label{sec:CMA}
 
 Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{CMA1, CMA2, CMA} es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales. 
-La característica principal del algoritmo es que en cada iteración se generan, a través de una Distribución Normal Multivariante en $\Re^{d}$, $\lambda$ individuos nuevos, y a partir de estos individuos realizar una serie de cálculos intermedios para actualizar la matriz de covarianza asociada a la distribución \cite{CMA1}. \\  
+La característica principal del algoritmo es que en cada iteración se generan, a través de una Distribución Normal Multivariante en $\Re^{D}$, $\lambda$ individuos nuevos, y a partir de estos individuos realizar una serie de cálculos intermedios para actualizar la matriz de covarianza asociada a la distribución \cite{CMA1}. \\  
 El diseño del algoritmo CMA-ES no necesita un gran esfuerzo en la elección de los parámetros ya que es el algoritmo quién, internamente, se encarga de establecer los parámetros que utiliza, a excepción del tamaño de la población $\lambda$ que debe ser definido por el usuario. Sin embargo, esta estrategia interna que define los parámetros sí forma parte del diseño del algoritmo y es uno de los pilares esenciales del rendimiento del mismo. \\
 
 Las estrategias internas para definir los parámetros, estrategias de reinicio y los criterios de finalización hace que encontremos una gran cantidad de variantes del algoritmo CMA-ES puro. La estructura básica del algoritmo CMA-ES se puede dividir en las etapas descritas en las siguientes secciones: \\ 
@@ -105,14 +105,14 @@ El algoritmo CMA-ES requiere que el usuario únicamente indique el tamaño de po
 
 \begin{itemize}
 \item $\lambda$: Número de individuos de la población.
-\item C: La matriz de covarianza C tendrá dimensión $\textrm{C}_{\lambda}^{d}$, donde $\lambda$ es el número de individuos empleados por el algoritmo y \textit{d} es la dimensión de la función a optimizar.
+\item C: La matriz de covarianza C tendrá dimensión $\textrm{C}_{\lambda}^{D}$, donde $\lambda$ es el número de individuos empleados por el algoritmo y \textit{D} es la dimensión de la función a optimizar.
 \item $\sigma$: Parámetro para controlar el índice de variación entre cada generación de individuos.
 \item $\mu$: En una selección elitista de individuos supervivientes, representa los mejores individuos a tener en cuenta dentro de la población.
 \item $c_{c}$ y $c_{1}$: Ratio de aprendizaje para la actualización de la matriz de covarianza empleando una selección elitista de sólo un individuo.
 \item $c_{\mu}$: Ratio de aprendizaje para la actualización de la matriz de covarianza empleando los $\mu$ mejores individuos.
 \item $c_{\sigma}$: Ratio de aprendizaje para el incremento de $\sigma$.
 \item $d_{\sigma}$: Parámetro de amortiguación para la actualización del paso de control.
-\item $m^{g} \in \Re^{d}$: Valor medio de la distribución en la generación \textit{g}.
+\item $m^{g} \in \Re^{D}$: Valor medio de la distribución en la generación \textit{g}.
 \item $p_{\sigma}$: Valor de paso para $\sigma$.
 \item $p_{c}$: Valor de paso para C.
 \end{itemize}
@@ -124,7 +124,7 @@ La etapa de muestreo del algoritmo CMA-ES es la encargada de generar $\lambda$ n
 \end{equation}
 
 \subsection{Actualizar Media}
-Tras obtener los nuevos individuos para la iteración \textit{t} del algoritmo, es el momento de actualizar el valor medio de los individuos aplicando la siguiente fórmula: 
+Tras obtener los nuevos individuos para la iteración \textit{t} del algoritmo, es el momento de actualizar el valor medio de los individuos aplicando la siguiente ecuación: 
 \begin{equation} \label{eq:2}
     m \leftarrow \sum_{i=1}^{\mu} w_{wi}x_{i:\lambda} = m + \sigma y_{w}\quad donde\quad y_{w} = \sum_{i=1}^{\mu} w_{i}y_{i:\lambda} 
 \end{equation}
@@ -158,7 +158,7 @@ Por último, sólo queda actualizar el valor de $\sigma$ para la siguiente itera
 
 \subsection{Pseudocódigo}
 
-En nuestra implementación hemos partido de la base del algoritmo CMA-ES detallada en los apartados anteriores y hemos decidido añadir una fase de reinicio. La fase de reiniciar puede ser necesaria en los casos en qué el paso de control $\sigma$ haya aumentado bruscamente o bien no se hayan producido mejoras en las soluciones candidatas, el algoritmo se ha estancado en un óptimo local. \\
+En nuestra implementación hemos partido de la base del algoritmo CMA-ES detallada en los apartados anteriores y hemos decidido añadir una fase de reinicio. La fase de reiniciar puede ser necesaria en los casos en qué el paso de control $\sigma$ haya aumentado bruscamente o bien no se hayan producido mejoras en las soluciones candidatas, o bien, el algoritmo se ha estancado en un óptimo local. \\
 
 Durante la fase de reinicio recalculamos todos los parámetros de la misma manera que se realiza en la fase de inicialización de parámetros a excepción del tamaño de población que en este caso lo incrementaremos para poder escapar de ese óptimo local. En este caso, el nuevo valor $\lambda$ se establecerá a 100. \\
 
@@ -201,9 +201,9 @@ Por último, debemos decrementar el valor de la temperatura con un valor prefija
 
 \subsection{Pseudocódigo}
 El siguiente pseudocódigo presenta el algoritmo SA desarrollado en este trabajo. \\
-El método \textit{AplicarPerturbacionAleatoria} es el encargado de modificar la solución actual haciendo uso de la ecuación \ref{eq:perturbation}. Seguidamente, la nueva solución \textbf{S'} es comparada con su ancestro \textit{S} mediante el método \textit{EvaluarDiferencia} el cual, calcula la diferencia entre ambas mediante la ecuación \ref{eq:evaluate}. \\
+El método \textit{AplicarPerturbacionAleatoria} es el encargado de modificar la solución actual haciendo uso de la Ecuación \ref{eq:perturbation}. Seguidamente, la nueva solución \textbf{S'} es comparada con su ancestro \textit{S} mediante el método \textit{EvaluarDiferencia} el cual, calcula la diferencia entre ambas mediante la Ecuación \ref{eq:evaluate}. \\
 A continuación, se define la nueva solución factible actual. Para ello, el método \textit{ActualizarSolucion} recibe ambas soluciones (S y S') y la diferencia entre ellas para determinar la nueva solución factible al problema y, si fuera necesario aplicar de la ecuación \ref{eq:other} para realizar esta labor. \\
-Finalmente, se decrementa la temperatura actual aplicando la fórmula \ref{eq:decreaseT} y se aplica la búsqueda global explicada en la sección \ref{sec:BG}.
+Finalmente, se decrementa la temperatura actual aplicando la fórmula \ref{eq:decreaseT} y se aplica la búsqueda global explicada en la Sección \ref{sec:BG}.
 \input{algorithms/simulatedAnnealing.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
