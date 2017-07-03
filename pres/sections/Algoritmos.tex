@@ -1,0 +1,305 @@
+\begin{frame}
+
+\frametitle{Algoritmos Desarrollados}
+\begin{block}{}
+\begin{itemize}
+	\item\gls{obl}
+	\item\gls{gs}
+\end{itemize}
+\end{block}
+
+\begin{block}{}
+\begin{itemize}
+	\Fontvii
+	\item\gls{obl-cpso}
+	\Fontvi
+	\item\gls{cma-es}
+	\Fontvi
+	\item\gls{hsags}
+	\end{itemize}
+\end{block}
+
+\end{frame}
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\begin{frame}
+\frametitle{Opposition-Based Learning}
+\begin{block}{}
+Opposition-Based Learning es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización.
+\end{block}
+\begin{block}{}
+Al evaluar una solución candidata $X$ perteneciente al conjunto $S$, simultáneamente calcularemos y evaluaremos la solución opuesta $\overline{X}$.
+\end{block}
+\begin{block}{Variantes \cite{Segredo2017}}
+\begin{itemize}
+	\item\gls{qobl}
+	\item\gls{qrobl}
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Opposition-Based Learning}
+\begin{block}{Definición formal}
+Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma \cite{obl}:
+ \begin{equation}
+     \overline{x} = a + b - x 
+ \end{equation}
+ \end{block}
+ \begin{block}{Función D-Dimensional}
+Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $D-dimensional$ con $ x_{1},...,x_{D} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$ \cite{obl}. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{D}}$ donde:
+\begin{equation}
+    \overline{x_{i}} = a_{i} + b_{i} - x_{i} \quad i = 1,...,D 
+\end{equation}
+ \end{block}
+\end{frame}
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\begin{frame}
+\frametitle{Búsqueda Global}
+\begin{block}{}
+En ciencias de la computación, una búsqueda global (Global Search) es un método heurístico para resolver problemas complejos de optimización \cite{GlobalSearch, GlobalSearch2, GlobalSearch3}.
+ \end{block}
+\begin{block}{}
+\begin{itemize}
+	\item Explorar nuevas regiones del espacio de búsqueda $\Omega$.
+	\item Equilibrio entre intensificación y diversificación.
+\end{itemize}
+ \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Búsqueda Global}
+\begin{block}{Centroide}
+El centroide de un conjunto de $k$ elementos, tal que $k = \left | S \right |$, se define como:
+\begin{equation}
+    C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
+\end{equation}
+ \end{block}
+\begin{block}{}
+Cada elemento $x_{i}$ representa una solución factible a nuestro problema con $D$ variables.
+ \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Búsqueda Global}
+\begin{algorithm}[H]
+  \caption{Cálculo del centroide}
+  \label{pseu:centroide}
+  \begin{algorithmic}[1]
+    \FOR{$i \leftarrow 0 $ hasta $D$}
+      \STATE $Suma = 0$;
+      \FOR{$j \leftarrow 0$ hasta $\left | S \right |$}
+        \STATE $Suma = Suma + S[i][j];$
+      \ENDFOR
+      \STATE Centroide[i] = $\frac{Suma}{\left | S \right |}$;
+    \ENDFOR    
+    \RETURN Centroide
+  \end{algorithmic}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}
+\centering
+\frametitle{Búsqueda Global}
+  \scalebox{0.6}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Búsqueda global(\mbox{})}
+  \label{pseu:bg}
+  \begin{multicols}{2}
+  \begin{algorithmic}[1]
+    \STATE NumIndividuos = $\left | S \right |$;
+    \STATE OrdenarPoblacion(S);
+    \STATE MarcarNoExplorados(S);
+    \STATE Centroide = CalcularCentroide();
+    \STATE NumeroMejora = 0;
+    \STATE NumeroExplorado = 0;
+    \WHILE{$NumeroMejora > 0 $ y $NumeroExplorado < \left | S \right |$}
+      \STATE k = 0;
+      \WHILE{$S[k] = explorado $ y $NumeroExplorado < \left | S \right |$}
+        \STATE k = rand(0, $\left | S \right |$); (1)
+      \ENDWHILE
+      \STATE S[k] = explorado;
+      \STATE NumeroExplorado = NumeroExplorado + 1;
+      \STATE Mejora = true;
+      \WHILE{$Mejora = true$}
+        \WHILE{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}
+          \STATE GenerarRand(a1, a2, a3); (2)
+        \ENDWHILE
+        \WHILE{$ r_{1} < k$}
+          \STATE $ r_{1}$ = rand(0, $\left | S \right |$); (2)
+        \ENDWHILE
+        \STATE NuevoInd = ModificarIndividuo(k, a1, a2, a3, Centroide, $r_{1}$);
+        \IF{$NuevoInd < S[k]$}
+          \STATE $Mejora = true;$
+          \STATE $S = S \cap NuevoInd$;
+          \STATE NumeroMejora = NumeroMejora + 1;
+          \ELSE
+            \STATE Mejora = false;
+        \ENDIF
+      \ENDWHILE
+    \ENDWHILE
+    \STATE OrdenarPoblacion(S); 
+    \STATE S = ObtenerMejores(0, NumIndividuos, S);
+    \RETURN $\left | S \right |$ mejores individuos encontrados
+  \end{algorithmic}
+  \end{multicols}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+\begin{frame}{\resizebox{\textwidth}{!}{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}}
+\begin{block}{Particle Swarm Optimization}
+Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es una estrategia de optimización que ha demostrado ser muy eficiente en problemas de optimización global continua.
+ \end{block}
+\begin{block}{Características}
+\begin{itemize}
+	\item Conjunto de soluciones $S$ como un enjambre de partículas.
+	\item Las partículas se mueven dentro de $\Omega$.
+	\item Cada partícula posee una posición $x_{i}$ y una velocidad $\overrightarrow{v}$.
+	\item Recuerdan su mejor posición alcanzada $pb_{i}$ \cite{metabook}.
+	\item Mejor partícula global $gb$.
+\end{itemize}
+ \end{block}
+\end{frame}
+
+\begin{frame}{OBL-CPSO}
+\centering
+  \scalebox{0.8}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Particle Swarm Optimization(\mbox{})}
+  \label{pseu:pso}
+  \begin{algorithmic}[1]
+    \WHILE{Condición de parada no satisfecha}
+      \FORALL{$p_{i}$ en S}
+        \STATE Evaluar $ p_{i} $;
+        \STATE Actualizar mejor posición $pb_{i}$;
+        \STATE Actualizar mejor global $gb$;
+      \ENDFOR
+      \FORALL{$p_{i}$ en S}
+       \FORALL{$d_{i}$ en D}
+       \STATE $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\ Rnd(0,1) devuelve un número generado aleatoriamente en el rango [0, 1]
+            $ x_{i,d} = x_{i,d} + v_{i,d}$; \\
+       \ENDFOR
+      \ENDFOR
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+
+\begin{frame}{OBL-CPSO}
+\begin{block}{}
+El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} incluye dos modificaciones:
+\begin{itemize}
+	\item Opposition-based Learning.
+	\item Procedimiento de Competición.
+\end{itemize}
+\end{block}
+
+\begin{block}{Competición}
+Escogemos, aleatoriamente, tres partículas dentro del enjambre y las hacemos competir entre ellas mediante su valor de función objetivo. 
+\end{block}
+\begin{block}{}
+Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones \cite{oblcpso}.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{OBL-CPSO}
+\begin{block}{}
+\begin{itemize}
+	\item Ganadora - Winner (w): pasa directamente a la siguiente iteración.
+	\item Neutra (n): utilizamos OBL.
+	\item Perdedora - Loser (l): aprende de la partícula ganadora.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink=20]
+\frametitle{OBL-CPSO}
+\begin{block}{}
+\begin{equation}\label{eq:7}
+    V^{k}_{ld}(t+1) = R^{k}_{1d}(t) * V^{k}_{ld}(t) + R^{k}_{2d}(t) * (X^{k}_{wd}(t) - X^{k}_{ld}(t)) + \varphi * R^{k}_{3d}(t) * (\overline{X}^{k}_{ld}(t+1)) 
+\end{equation}
+
+\begin{equation}\label{eq:8}
+     X^{k}_{ld}(t+1) = X^{k}_{ld}(t) + V^{k}_{ld}(t+1)
+\end{equation}
+
+\begin{equation}\label{eq:9}
+     X^{k}_{nd}(t+1) = ub_{d} + lb_{d} - X^{k}_{nd}(t) + R^{k}_{4d}(t) * X^{k}_{nd}(t)
+\end{equation}
+
+\end{block}
+\begin{block}{}
+Donde $X^{k}_{wd}(t)$, $ X^{k}_{ld}(t)$ y $ X^{k}_{nd}(t)$ son las posiciones d-ésimas de las w, l y n en la k-ésima ronda de competición dentro de la iteración t. \\
+$V^{k}_{ld}$ es la velocidad de la partícula l en la dimensión d-ésima en la k-ésima ronda de competición de la iteración t \cite{oblcpso}. \\
+$R^{k}_{1d}$, $R^{k}_{2d}(t)$, $R^{k}_{3d}(t)$ y $R^{k}_{4d}(t) \in [0, 1]$ \\
+$\varphi$ es un parámetro fijado manualmente. \\
+$\overline{X}^{k}_{ld}(t)$ representa el valor medio de las posiciones de las partículas dentro del enjambre. \\
+$ub_{d}$ y $lb_{d}$ son las cotas superiores e inferiores del espacio de búsqueda en la dimensión d-ésima \cite{oblcpso}. \\
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{OBL-CPSO}
+\begin{block}{Problemas en la actualización}
+Si una variable $x_{i}$ toma un valor fuera del rango $[a,b]: $
+\begin{itemize}
+    \item \textbf{$X_{id} > b$}: $X_{id} = b$.
+    \item \textbf{$X_{id} < a$}: $X_{id} = a$.
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{OBL-CPSO}
+\centering
+  \scalebox{0.8}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{OBL Competitive Particle Swarm Optimization(\mbox{})}
+  \label{pseu:oblcpso}
+  \begin{algorithmic}[1]
+    \STATE Inicializar();
+    \WHILE{Condición de parada no satisfecha}
+      \FORALL{$ k=1: N/3 $}
+        \STATE $ r_{1} = S(k)$;
+        \STATE $ r_{2} = S(k + N/3)$;
+        \STATE $ r_{3} = S(k + 2N/3)$;
+        \STATE $(w, n, l) = competir(r_{1}, r_{2}, r_{3})$;
+        \STATE Actualizar $ X^{k}_{ld}(t)$; (Ec. \ref{eq:7} y Ec. \ref{eq:8})
+        \STATE Actualizar $ X^{k}_{nd}(t)$; (Ec. \ref{eq:9})
+        \STATE Actualizar los valores de fitness para N y L;
+      \ENDFOR
+      \STATE BusquedaGlobal(); secc. \ref{sec:BG}
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+\begin{frame}{\resizebox{\textwidth}{!}{Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)}}
+\begin{block}{}
+Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{CMA1, CMA2, CMA} es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales.
+ \end{block}
+ \begin{block}{Características}
+ \begin{itemize}
+ 	\item Muestreo mediante Distribución Normal Multivariante.
+ 	\item No es necesario un gran estudio de los parámetros.
+ 	\item Gran abánico de posibilidades en el diseño. Reinicios y criterios de finalización.
+ \end{itemize}
+ \end{block}
+\end{frame}

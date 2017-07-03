@@ -12,3 +12,7 @@
 *.nav
 *.out
 *.snm
+*.acn
+*.bcf
+*.xml
+*.xdy
