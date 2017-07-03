@@ -1,5 +1,5 @@
 \begin{algorithm}[!ht]
-  \caption{Simulated Annealing(\mbox{})}
+  \caption{Hybrid Simulated Annealing with Global Search(\mbox{})}
   \label{pseu:sa}
   \begin{algorithmic}[1]
     \STATE S = GenerarSolucionAleatoria();
@@ -9,7 +9,7 @@
         \STATE Dif = EvaluarDiferencia(S, S'); \ref{eq:evaluate} 
         \STATE S = ActualizarSolucion(S, S', Dif);  \ref{eq:other}
         \STATE T = ActualizarTemperatura(T); \ref{eq:decreaseT}
-        \STATE BusquedaGlobal(); secc. \ref{sec:BG}
+        \STATE S = BusquedaGlobalSA(); secc. \ref{sec:BG}
     \ENDWHILE
     \RETURN Mejor solución obtenida
   \end{algorithmic}
