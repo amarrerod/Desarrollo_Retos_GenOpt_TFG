@@ -7,7 +7,17 @@
 \usepackage{natbib}
 \usepackage{algorithm,algorithmic}
 \usepackage{multicol}
-
+\usepackage[dvips]{epsfig}
+\usepackage{alltt}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{capt-of}% or use the larger `caption` package
+\setcounter{MaxMatrixCols}{20}
+\usepackage{amstext} % for \text macro
+\usepackage{array}   % for \newcolumntype macro
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
 \newcommand\Fontvi{\fontsize{10}{7.2}\selectfont}
 \newcommand\Fontvii{\fontsize{8}{7.2}\selectfont}
 
@@ -34,7 +44,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Desarrollo de Algoritmos Dirigido por Retos]{Desarrollo de Algoritmos Dirigido por Retos}
-\author[Alejandro Marrero Díaz]{Alejandro Marrero Díaz\\[3mm]Eduardo Manuel Segredo González, Carlos Segura González}
+\author[Alejandro Marrero Díaz]{\Huge{Alejandro Marrero Díaz}}
 \institute[ULL]{Universidad de La Laguna}
 \date[]{\today}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,10 +73,8 @@
   
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
 \begin{frame}
-
+  \centering
   \includegraphics[width=0.15\textwidth]{img/ullesc.eps}
-  \hspace*{7.5cm}
-  \includegraphics[width=0.16\textwidth]{img/etsii.eps}
   \titlepage
 
   \begin{scriptsize}
@@ -83,33 +91,24 @@
 \begin{frame}
   \frametitle{Índice}  
   \tableofcontents
-
 \end{frame}
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-\section{Introducción}
+\Fontvi
 \input{sections/Introduccion}
 
-\section{Conceptos Previos}
 \input{sections/ConceptosPrevios}
 
-\section{Algoritmos Desarrollados}
 \input{sections/Algoritmos}
 
-\section{Evaluación Experimental}
 \input{sections/EvaluacionExperimental}
 
-\section{Conclusiones y Líneas Futuras}
-\input{sections/Conclusiones}
-
-\section{Conclusions and Future Work}
 \input{sections/Conclusions}
 
+\input{sections/preguntas}  
 \section{Bibliografía}
 \begin{frame}[allowframebreaks]
         \frametitle{Bibliografía}
         \bibliography{slides}
 \end{frame}
-  
-
+\input{sections/cover}
 \end{document}

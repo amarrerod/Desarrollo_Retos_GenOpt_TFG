@@ -1,53 +1,17 @@
-\begin{frame}
 
-\frametitle{Algoritmos Desarrollados}
-\begin{block}{}
-\begin{itemize}
-	\item\gls{obl}
-	\item\gls{gs}
-\end{itemize}
-\end{block}
+\section{Algoritmos Desarrollados}
 
-\begin{block}{}
-\begin{itemize}
-	\Fontvii
-	\item\gls{obl-cpso}
-	\Fontvi
-	\item\gls{cma-es}
-	\Fontvi
-	\item\gls{hsags}
-	\end{itemize}
-\end{block}
-
-\end{frame}
-
-%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\begin{frame}
-\frametitle{Opposition-Based Learning}
-\begin{block}{}
-Opposition-Based Learning es un concepto en computación que ha demostrado gran efectividad a la hora de mejorar diversas técnicas de optimización.
-\end{block}
-\begin{block}{}
-Al evaluar una solución candidata $X$ perteneciente al conjunto $S$, simultáneamente calcularemos y evaluaremos la solución opuesta $\overline{X}$.
-\end{block}
-\begin{block}{Variantes \cite{Segredo2017}}
-\begin{itemize}
-	\item\gls{qobl}
-	\item\gls{qrobl}
-	\end{itemize}
-\end{block}
-\end{frame}
-
+\subsection{Opposition-Based Learning}
 \begin{frame}
 \frametitle{Opposition-Based Learning}
 \begin{block}{Definición formal}
-Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma \cite{obl}:
+Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma:
  \begin{equation}
      \overline{x} = a + b - x 
  \end{equation}
  \end{block}
  \begin{block}{Función D-Dimensional}
-Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $D-dimensional$ con $ x_{1},...,x_{D} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$ \cite{obl}. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{D}}$ donde:
+Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $D-dimensional$ con $ x_{1},...,x_{D} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{D}}$ donde:
 \begin{equation}
     \overline{x_{i}} = a_{i} + b_{i} - x_{i} \quad i = 1,...,D 
 \end{equation}
@@ -55,48 +19,16 @@ Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $
 \end{frame}
 
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Búsqueda Global}
 \begin{frame}
-\frametitle{Búsqueda Global}
-\begin{block}{}
+\frametitle{Búsqueda Global} \label{sec:BG}
+\begin{block}{Definición}
 En ciencias de la computación, una búsqueda global (Global Search) es un método heurístico para resolver problemas complejos de optimización \cite{GlobalSearch, GlobalSearch2, GlobalSearch3}.
- \end{block}
-\begin{block}{}
 \begin{itemize}
-	\item Explorar nuevas regiones del espacio de búsqueda $\Omega$.
-	\item Equilibrio entre intensificación y diversificación.
+  \item Explorar nuevas regiones del espacio de búsqueda $\Omega$.
+  \item Equilibrio entre intensificación y diversificación.
 \end{itemize}
  \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{Búsqueda Global}
-\begin{block}{Centroide}
-El centroide de un conjunto de $k$ elementos, tal que $k = \left | S \right |$, se define como:
-\begin{equation}
-    C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
-\end{equation}
- \end{block}
-\begin{block}{}
-Cada elemento $x_{i}$ representa una solución factible a nuestro problema con $D$ variables.
- \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{Búsqueda Global}
-\begin{algorithm}[H]
-  \caption{Cálculo del centroide}
-  \label{pseu:centroide}
-  \begin{algorithmic}[1]
-    \FOR{$i \leftarrow 0 $ hasta $D$}
-      \STATE $Suma = 0$;
-      \FOR{$j \leftarrow 0$ hasta $\left | S \right |$}
-        \STATE $Suma = Suma + S[i][j];$
-      \ENDFOR
-      \STATE Centroide[i] = $\frac{Suma}{\left | S \right |}$;
-    \ENDFOR    
-    \RETURN Centroide
-  \end{algorithmic}
-\end{algorithm}
 \end{frame}
 
 \begin{frame}
@@ -149,25 +81,41 @@ Cada elemento $x_{i}$ representa una solución factible a nuestro problema con $
 \end{minipage}}
 \end{frame}
 
-
-%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-\begin{frame}{\resizebox{\textwidth}{!}{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}}
-\begin{block}{Particle Swarm Optimization}
-Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es una estrategia de optimización que ha demostrado ser muy eficiente en problemas de optimización global continua.
+\begin{frame}
+\frametitle{Búsqueda Global}
+\begin{block}{Centroide}
+El centroide de un conjunto de $k$ elementos, tal que $k = \left | S \right |$, se define como:
+\begin{equation}
+    C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
+\end{equation}
  \end{block}
-\begin{block}{Características}
-\begin{itemize}
-	\item Conjunto de soluciones $S$ como un enjambre de partículas.
-	\item Las partículas se mueven dentro de $\Omega$.
-	\item Cada partícula posee una posición $x_{i}$ y una velocidad $\overrightarrow{v}$.
-	\item Recuerdan su mejor posición alcanzada $pb_{i}$ \cite{metabook}.
-	\item Mejor partícula global $gb$.
-\end{itemize}
+\begin{block}{}
+Cada elemento $x_{i}$ representa una solución factible a nuestro problema con $D$ variables.
  \end{block}
 \end{frame}
 
-\begin{frame}{OBL-CPSO}
+\begin{frame}
+\frametitle{Búsqueda Global}
+\begin{algorithm}[H]
+  \caption{Cálculo del centroide}
+  \label{pseu:centroide}
+  \begin{algorithmic}[1]
+    \FOR{$i \leftarrow 0 $ hasta $D$}
+      \STATE $Suma = 0$;
+      \FOR{$j \leftarrow 0$ hasta $\left | S \right |$}
+        \STATE $Suma = Suma + S[i][j];$
+      \ENDFOR
+      \STATE Centroide[i] = $\frac{Suma}{\left | S \right |}$;
+    \ENDFOR    
+    \RETURN Centroide
+  \end{algorithmic}
+\end{algorithm}
+\end{frame}
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{OBL Competitive Particle Swarm Optimization}
+
+\begin{frame}{\resizebox{\textwidth}{!}{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}}
 \centering
   \scalebox{0.8}{%
   \begin{minipage}[b]{1.2\linewidth}
@@ -196,7 +144,7 @@ Particle Swarm Optimization (PSO) \cite{metabook, comparison, PSO_KA, GPSO} es u
 
 
 \begin{frame}{OBL-CPSO}
-\begin{block}{}
+\begin{block}{Diseño}
 El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} incluye dos modificaciones:
 \begin{itemize}
 	\item Opposition-based Learning.
@@ -206,26 +154,21 @@ El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (
 
 \begin{block}{Competición}
 Escogemos, aleatoriamente, tres partículas dentro del enjambre y las hacemos competir entre ellas mediante su valor de función objetivo. 
-\end{block}
-\begin{block}{}
 Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones \cite{oblcpso}.
-\end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{OBL-CPSO}
-\begin{block}{}
 \begin{itemize}
-	\item Ganadora - Winner (w): pasa directamente a la siguiente iteración.
-	\item Neutra (n): utilizamos OBL.
-	\item Perdedora - Loser (l): aprende de la partícula ganadora.
+  \Fontvi
+  \item Ganadora (w).
+  \item Neutra (n).
+  \item Perdedora (l).
 \end{itemize}
 \end{block}
 \end{frame}
 
+
 \begin{frame}[shrink=20]
 \frametitle{OBL-CPSO}
-\begin{block}{}
+\begin{block}{Ecuaciones de actualización}
+\centering
 \begin{equation}\label{eq:7}
     V^{k}_{ld}(t+1) = R^{k}_{1d}(t) * V^{k}_{ld}(t) + R^{k}_{2d}(t) * (X^{k}_{wd}(t) - X^{k}_{ld}(t)) + \varphi * R^{k}_{3d}(t) * (\overline{X}^{k}_{ld}(t+1)) 
 \end{equation}
@@ -238,25 +181,6 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
      X^{k}_{nd}(t+1) = ub_{d} + lb_{d} - X^{k}_{nd}(t) + R^{k}_{4d}(t) * X^{k}_{nd}(t)
 \end{equation}
 
-\end{block}
-\begin{block}{}
-Donde $X^{k}_{wd}(t)$, $ X^{k}_{ld}(t)$ y $ X^{k}_{nd}(t)$ son las posiciones d-ésimas de las w, l y n en la k-ésima ronda de competición dentro de la iteración t. \\
-$V^{k}_{ld}$ es la velocidad de la partícula l en la dimensión d-ésima en la k-ésima ronda de competición de la iteración t \cite{oblcpso}. \\
-$R^{k}_{1d}$, $R^{k}_{2d}(t)$, $R^{k}_{3d}(t)$ y $R^{k}_{4d}(t) \in [0, 1]$ \\
-$\varphi$ es un parámetro fijado manualmente. \\
-$\overline{X}^{k}_{ld}(t)$ representa el valor medio de las posiciones de las partículas dentro del enjambre. \\
-$ub_{d}$ y $lb_{d}$ son las cotas superiores e inferiores del espacio de búsqueda en la dimensión d-ésima \cite{oblcpso}. \\
-\end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{OBL-CPSO}
-\begin{block}{Problemas en la actualización}
-Si una variable $x_{i}$ toma un valor fuera del rango $[a,b]: $
-\begin{itemize}
-    \item \textbf{$X_{id} > b$}: $X_{id} = b$.
-    \item \textbf{$X_{id} < a$}: $X_{id} = a$.
-    \end{itemize}
 \end{block}
 \end{frame}
 
@@ -290,16 +214,211 @@ Si una variable $x_{i}$ toma un valor fuera del rango $[a,b]: $
 
 
 %++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Covariance Matrix Adaptation Evolutionary Strategy}
 
 \begin{frame}{\resizebox{\textwidth}{!}{Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)}}
-\begin{block}{}
-Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{CMA1, CMA2, CMA} es un algoritmo evolutivo diseñado para problemas de optimización continua no lineales.
+\begin{block}{Parámetros}
+\begin{itemize}
+\item $\lambda$: tamaño de la población.
+\item C: la matriz de covarianza C de dimensión $\textrm{C}_{\lambda}^{D}$.
+\item $\sigma$: índice de variacón entre generaciones.
+\item $\mu$: individuos seleccionados en la selección elitista.
+\item $m^{g} \in \Re^{D}$: Valor medio de la distribución en la generación \textit{g}
+\item $p_{\sigma}$: Valor de paso para $\sigma$.
+\item $p_{c}$: Valor de paso para C.
+\item $w_{i}$: Pesos generados aleatoriamente para los $\mu$-mejores individuos.
+\item $\mu_{w}$: Inversa de los pesos $w_{i}$ al cuadrado.
+\end{itemize}
  \end{block}
- \begin{block}{Características}
- \begin{itemize}
- 	\item Muestreo mediante Distribución Normal Multivariante.
- 	\item No es necesario un gran estudio de los parámetros.
- 	\item Gran abánico de posibilidades en el diseño. Reinicios y criterios de finalización.
- \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{CMA-ES}
+\begin{block}{Pasos del algoritmo}
+\begin{itemize}
+\item Muestreo.
+\item Actualización.
+  \begin{itemize}
+    \item Valor Medio.
+    \item Matriz de Covarianza.
+    \item Sigma $\sigma$.
+    \end{itemize}
+\item Búsqueda Global.
+\item Reinicio (opcional).
+\begin{itemize}
+  \item $\sigma = 2.0$
+  \item $\lambda = 100$
+  \end{itemize}
+\end{itemize}
  \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{CMA-ES}
+\begin{block}{Muestreo}
+  \begin{equation}\label{eq:1}
+        x_{i} = m + \sigma y_{i},\quad y_{i}\sim N_{i}(0, C),\quad para\quad i=1,...,\lambda 
+  \end{equation}
+\end{block}
+\begin{block}{Actualizar el valor medio}
+  \begin{equation} \label{eq:2}
+    m \leftarrow \sum_{i=1}^{\mu} w_{i}x_{i:\lambda} = m + \sigma y_{w}\quad donde\quad y_{w} = \sum_{i=1}^{\mu} w_{i}y_{i:\lambda} 
+\end{equation}
+\end{block}
+\begin{block}{Pasos para C}
+  \begin{equation} \label{eq:3}
+   p_{c} \leftarrow (1 - c_{c})p_{c} + 1\cdot\left \{ \left \|p_{\sigma}\right \|< 1.5 \sqrt{n} \right \} \sqrt{1 - (1 - c_{c})^2}\sqrt{\mu_{w}}y_{w} 
+\end{equation}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{CMA-ES}
+\begin{block}{Paso para $\sigma$}
+\begin{equation} \label{eq:4}
+     p_{\sigma} \leftarrow (1 - c_{\sigma})p_{\sigma}\sqrt{1 - (1 - c_{\sigma})^2}\sqrt{\mu_{w}}\cdot C^{-1/2}y_{w} 
+\end{equation}
+\end{block}
+\begin{block}{Actualización de C}
+\begin{equation} \label{eq:5}
+    C \leftarrow (1 - c_{1} - c_{\mu})\cdot C + c_{1}p_{c}p_{c}^{T} + c_{\mu} \sum_{i=1}^{\mu} w_{i}y_{i:\lambda}y_{i:\lambda}^{T} 
+\end{equation}
+\end{block}
+\begin{block}{Actualización de $\sigma$}
+\begin{equation} \label{eq:6}
+     \sigma\leftarrow\sigma \times \exp(\frac{c_{\sigma}}{d_{\sigma}} (\frac{\left \| p_{\sigma}\right\|}{E \left \|N(0, I)\right \|}) - 1)
+\end{equation}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{CMA-ES}
+\centering
+  \scalebox{0.6}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Covariance Matrix Adaptation Evolutionary Strategy (\mbox{})}
+  \label{pseu:cmaes}
+  \begin{algorithmic}[1]
+    \REQUIRE \[ m\in R^{n}, \sigma\in R_{+}, \lambda\]
+    \STATE Inicialización 
+    \[C = I, p_{c} = 0, p_{\sigma} = 0\]
+    \[ c_{c}\approx 4/n, c_{\sigma}\approx 4/n, c_{1}\approx 2/n^2, c_{\mu}\approx \mu_{w}/n^2, c_{1} + c_{\mu}\leq 1\]
+    \[ d_{\sigma}\approx 1+\sqrt{\frac{\mu_{w}}{n}}, 
+    w_{i}=1...\lambda \quad tal\quad que \quad \mu_{w} = \frac{1}{\sum_{i=1}^{\mu}w_{i}^2}\approx 0.3\lambda\]
+    \WHILE{Condición de parada no satisfecha}
+      \STATE Muestreo (Ec.\ref{eq:1});
+      \STATE Actualizar el valor medio (Ec. \ref{eq:2});
+      \STATE Incremento de C (Ec. \ref{eq:3});
+      \STATE Incremento de $\sigma$ (Ec. \ref{eq:4});
+      \STATE Actualizar C (Ec. \ref{eq:5});
+      \STATE Actualizar $\sigma$ (Ec. \ref{eq:6});
+      \STATE BusquedaGlobal(); Diap. \ref{sec:BG};
+      \IF{Reinicio necesario} \STATE {Reiniciar();} \ENDIF
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Hybrid Simulated Annealing with Global Search}
+
+\begin{frame}{\resizebox{\textwidth}{!}{Hybrid Simulated Annealing with Global Search (HSAGS)}}
+\begin{block}{Simulated Annealing (SA)}
+Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística queestá inspirada por el proceso de recocido en la metalurgia \cite{metabook}.
+\begin{itemize}
+  \item Iniciamos con un valor $T_{0}$ muy elevado.
+  \item Un único individuo en la población.
+\end{itemize}
+\end{block}
+\begin{block}{Pasos del Algoritmo}
+\begin{itemize}
+  \item Perturbación.
+  \item Evaluación.
+  \item Actualizar Temperatura.
+  \item Búsqueda global para SA.
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}
+\frametitle{HSAGS}
+\begin{block}{Pertubación}
+\begin{equation}\label{eq:perturbation}
+    x = x + \Delta x
+\end{equation}
+\end{block}
+\begin{block}{Evaluación}
+\begin{equation}\label{eq:evaluate}
+    \Delta E(x) = E(x + \Delta x) - E(x)
+\end{equation}
+\begin{equation}\label{eq:other}
+    P = e^{- \frac{\Delta E}{T}}
+\end{equation}
+\end{block}
+\begin{block}{Actualizar Temperatura}
+\begin{equation} \label{eq:decreaseT}
+    T = T - \Delta T
+\end{equation}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Búsqueda Global para HSAGS}
+\centering
+  \scalebox{0.6}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{BúsquedaGlobalSA(\mbox{})}
+  \label{pseu:bg}
+  \begin{algorithmic}[1]
+    \STATE Individuo = S[0];
+    \STATE NumeroMejora = 0;
+    \WHILE{$NumeroMejora > 0 $}
+      \STATE Mejora = true;
+      \WHILE{$Mejora = true$}
+        \WHILE{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}
+          \STATE GenerarRand(a1, a2, a3); 
+        \ENDWHILE
+        \STATE NuevoInd = ModificarIndividuo(Individuo, a1, a2, a3);
+        \IF{$NuevoInd < Individuo$}
+          \STATE $Mejora = true;$
+          \STATE $S = S \cap NuevoInd$;
+          \STATE NumeroMejora = NumeroMejora + 1;
+          \ELSE
+            \STATE Mejora = false;
+        \ENDIF
+      \ENDWHILE
+    \ENDWHILE
+    \STATE OrdenarPoblacion(S); 
+    \STATE S = ObtenerMejorIndividuo(S);
+    \RETURN Mejor individuo encontrado
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+\begin{frame}
+\frametitle{HSAGS}
+\centering
+  \scalebox{0.9}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Hybrid Simulated Annealing with Global Search(\mbox{})}
+  \label{pseu:sa}
+  \begin{algorithmic}[1]
+    \STATE S = GenerarSolucionAleatoria();
+    \STATE T = InicializarTemperatura(); 
+    \WHILE{Condición de parada no satisfecha}
+        \STATE S' = AplicarPerturbacionAleatoria(S); Ec. \ref{eq:perturbation}
+        \STATE Dif = EvaluarDiferencia(S, S'); Ec. \ref{eq:evaluate} 
+        \STATE S = ActualizarSolucion(S, S', Dif); Ec.\ref{eq:other}
+        \STATE T = ActualizarTemperatura(T); Ec. \ref{eq:decreaseT}
+        \STATE S = BusquedaGlobalSA(); secc. Diap. \ref{sec:BG}
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
 \end{frame}
