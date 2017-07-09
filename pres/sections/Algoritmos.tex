@@ -1,5 +1,16 @@
 
 \section{Algoritmos Desarrollados}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \centering
+  \includegraphics[width=0.15\textwidth]{img/ullesc.eps}
+  \begin{scriptsize}
+    \begin{center}
+    \Huge{Algoritmos Desarrollados}
+    \end{center}
+  \end{scriptsize}
+\end{frame}
 
 \subsection{Opposition-Based Learning}
 \begin{frame}
@@ -164,6 +175,7 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
   \begin{algorithmic}[1]
     \STATE Inicializar();
     \WHILE{Condición de parada no satisfecha}
+      \STATE Agitar();
       \FORALL{$ k=1: N/3 $}
         \STATE $ r_{1} = S(k)$;
         \STATE $ r_{2} = S(k + N/3)$;
@@ -173,7 +185,7 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
         \STATE Actualizar $ X^{k}_{nd}(t)$; 
         \STATE Actualizar los valores de fitness para N y L;
       \ENDFOR
-      \STATE BusquedaGlobal(); secc. \ref{sec:BG}
+      \STATE BusquedaGlobal();
     \ENDWHILE
     \RETURN Mejor solución obtenida
   \end{algorithmic}
@@ -217,7 +229,7 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
       \STATE Actualizar el valor medio
       \STATE Actualizar C
       \STATE Actualizar $\sigma$ 
-      \STATE BusquedaGlobal(); Diap. \ref{sec:BG};
+      \STATE BusquedaGlobal(); 
       \IF{Reinicio necesario} \STATE {Reiniciar();} \ENDIF
     \ENDWHILE
     \RETURN Mejor solución obtenida
@@ -231,7 +243,7 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
 
 \begin{frame}{\resizebox{\textwidth}{!}{Hybrid Simulated Annealing with Global Search (HSAGS)}}
 \begin{block}{Simulated Annealing (SA)}
-Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística queestá inspirada por el proceso de recocido en la metalurgia \cite{metabook}.
+Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística que está inspirada por el proceso de recocido en la metalurgia \cite{metabook}.
 \begin{itemize}
   \item Iniciamos con un valor $T_{0}$ muy elevado.
   \item Un único individuo en la población.
@@ -298,7 +310,7 @@ Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística queestá i
         \STATE Dif = EvaluarDiferencia(S, S'); 
         \STATE S = ActualizarSolucion(S, S', Dif);
         \STATE T = ActualizarTemperatura(T);
-        \STATE S = BusquedaGlobalSA(); Diap. \ref{sec:BG}
+        \STATE S = BusquedaGlobalSA(); 
     \ENDWHILE
     \RETURN Mejor solución obtenida
   \end{algorithmic}
