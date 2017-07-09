@@ -19,17 +19,6 @@ Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $
 \end{frame}
 
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\subsection{Búsqueda Global}
-\begin{frame}
-\frametitle{Búsqueda Global} \label{sec:BG}
-\begin{block}{Definición}
-En ciencias de la computación, una búsqueda global (Global Search) es un método heurístico para resolver problemas complejos de optimización \cite{GlobalSearch, GlobalSearch2, GlobalSearch3}.
-\begin{itemize}
-  \item Explorar nuevas regiones del espacio de búsqueda $\Omega$.
-  \item Equilibrio entre intensificación y diversificación.
-\end{itemize}
- \end{block}
-\end{frame}
 
 \begin{frame}
 \centering
@@ -164,26 +153,6 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
 \end{block}
 \end{frame}
 
-
-\begin{frame}[shrink=20]
-\frametitle{OBL-CPSO}
-\begin{block}{Ecuaciones de actualización}
-\centering
-\begin{equation}\label{eq:7}
-    V^{k}_{ld}(t+1) = R^{k}_{1d}(t) * V^{k}_{ld}(t) + R^{k}_{2d}(t) * (X^{k}_{wd}(t) - X^{k}_{ld}(t)) + \varphi * R^{k}_{3d}(t) * (\overline{X}^{k}_{ld}(t+1)) 
-\end{equation}
-
-\begin{equation}\label{eq:8}
-     X^{k}_{ld}(t+1) = X^{k}_{ld}(t) + V^{k}_{ld}(t+1)
-\end{equation}
-
-\begin{equation}\label{eq:9}
-     X^{k}_{nd}(t+1) = ub_{d} + lb_{d} - X^{k}_{nd}(t) + R^{k}_{4d}(t) * X^{k}_{nd}(t)
-\end{equation}
-
-\end{block}
-\end{frame}
-
 \begin{frame}
 \frametitle{OBL-CPSO}
 \centering
@@ -200,8 +169,8 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
         \STATE $ r_{2} = S(k + N/3)$;
         \STATE $ r_{3} = S(k + 2N/3)$;
         \STATE $(w, n, l) = competir(r_{1}, r_{2}, r_{3})$;
-        \STATE Actualizar $ X^{k}_{ld}(t)$; (Ec. \ref{eq:7} y Ec. \ref{eq:8})
-        \STATE Actualizar $ X^{k}_{nd}(t)$; (Ec. \ref{eq:9})
+        \STATE Actualizar $ X^{k}_{ld}(t)$; 
+        \STATE Actualizar $ X^{k}_{nd}(t)$; 
         \STATE Actualizar los valores de fitness para N y L;
       \ENDFOR
       \STATE BusquedaGlobal(); secc. \ref{sec:BG}
@@ -224,71 +193,8 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
 \item $\sigma$: índice de variacón entre generaciones.
 \item $\mu$: individuos seleccionados en la selección elitista.
 \item $m^{g} \in \Re^{D}$: Valor medio de la distribución en la generación \textit{g}
-\item $p_{\sigma}$: Valor de paso para $\sigma$.
-\item $p_{c}$: Valor de paso para C.
-\item $w_{i}$: Pesos generados aleatoriamente para los $\mu$-mejores individuos.
-\item $\mu_{w}$: Inversa de los pesos $w_{i}$ al cuadrado.
 \end{itemize}
  \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{CMA-ES}
-\begin{block}{Pasos del algoritmo}
-\begin{itemize}
-\item Muestreo.
-\item Actualización.
-  \begin{itemize}
-    \item Valor Medio.
-    \item Matriz de Covarianza.
-    \item Sigma $\sigma$.
-    \end{itemize}
-\item Búsqueda Global.
-\item Reinicio (opcional).
-\begin{itemize}
-  \item $\sigma = 2.0$
-  \item $\lambda = 100$
-  \end{itemize}
-\end{itemize}
- \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{CMA-ES}
-\begin{block}{Muestreo}
-  \begin{equation}\label{eq:1}
-        x_{i} = m + \sigma y_{i},\quad y_{i}\sim N_{i}(0, C),\quad para\quad i=1,...,\lambda 
-  \end{equation}
-\end{block}
-\begin{block}{Actualizar el valor medio}
-  \begin{equation} \label{eq:2}
-    m \leftarrow \sum_{i=1}^{\mu} w_{i}x_{i:\lambda} = m + \sigma y_{w}\quad donde\quad y_{w} = \sum_{i=1}^{\mu} w_{i}y_{i:\lambda} 
-\end{equation}
-\end{block}
-\begin{block}{Pasos para C}
-  \begin{equation} \label{eq:3}
-   p_{c} \leftarrow (1 - c_{c})p_{c} + 1\cdot\left \{ \left \|p_{\sigma}\right \|< 1.5 \sqrt{n} \right \} \sqrt{1 - (1 - c_{c})^2}\sqrt{\mu_{w}}y_{w} 
-\end{equation}
-\end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{CMA-ES}
-\begin{block}{Paso para $\sigma$}
-\begin{equation} \label{eq:4}
-     p_{\sigma} \leftarrow (1 - c_{\sigma})p_{\sigma}\sqrt{1 - (1 - c_{\sigma})^2}\sqrt{\mu_{w}}\cdot C^{-1/2}y_{w} 
-\end{equation}
-\end{block}
-\begin{block}{Actualización de C}
-\begin{equation} \label{eq:5}
-    C \leftarrow (1 - c_{1} - c_{\mu})\cdot C + c_{1}p_{c}p_{c}^{T} + c_{\mu} \sum_{i=1}^{\mu} w_{i}y_{i:\lambda}y_{i:\lambda}^{T} 
-\end{equation}
-\end{block}
-\begin{block}{Actualización de $\sigma$}
-\begin{equation} \label{eq:6}
-     \sigma\leftarrow\sigma \times \exp(\frac{c_{\sigma}}{d_{\sigma}} (\frac{\left \| p_{\sigma}\right\|}{E \left \|N(0, I)\right \|}) - 1)
-\end{equation}
-\end{block}
 \end{frame}
 
 \begin{frame}
@@ -307,12 +213,10 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
     \[ d_{\sigma}\approx 1+\sqrt{\frac{\mu_{w}}{n}}, 
     w_{i}=1...\lambda \quad tal\quad que \quad \mu_{w} = \frac{1}{\sum_{i=1}^{\mu}w_{i}^2}\approx 0.3\lambda\]
     \WHILE{Condición de parada no satisfecha}
-      \STATE Muestreo (Ec.\ref{eq:1});
-      \STATE Actualizar el valor medio (Ec. \ref{eq:2});
-      \STATE Incremento de C (Ec. \ref{eq:3});
-      \STATE Incremento de $\sigma$ (Ec. \ref{eq:4});
-      \STATE Actualizar C (Ec. \ref{eq:5});
-      \STATE Actualizar $\sigma$ (Ec. \ref{eq:6});
+      \STATE Muestreo 
+      \STATE Actualizar el valor medio
+      \STATE Actualizar C
+      \STATE Actualizar $\sigma$ 
       \STATE BusquedaGlobal(); Diap. \ref{sec:BG};
       \IF{Reinicio necesario} \STATE {Reiniciar();} \ENDIF
     \ENDWHILE
@@ -340,27 +244,6 @@ Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística queestá i
   \item Actualizar Temperatura.
   \item Búsqueda global para SA.
 \end{itemize}
-\end{block}
-\end{frame}
-\begin{frame}
-\frametitle{HSAGS}
-\begin{block}{Pertubación}
-\begin{equation}\label{eq:perturbation}
-    x = x + \Delta x
-\end{equation}
-\end{block}
-\begin{block}{Evaluación}
-\begin{equation}\label{eq:evaluate}
-    \Delta E(x) = E(x + \Delta x) - E(x)
-\end{equation}
-\begin{equation}\label{eq:other}
-    P = e^{- \frac{\Delta E}{T}}
-\end{equation}
-\end{block}
-\begin{block}{Actualizar Temperatura}
-\begin{equation} \label{eq:decreaseT}
-    T = T - \Delta T
-\end{equation}
 \end{block}
 \end{frame}
 
@@ -411,11 +294,11 @@ Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística queestá i
     \STATE S = GenerarSolucionAleatoria();
     \STATE T = InicializarTemperatura(); 
     \WHILE{Condición de parada no satisfecha}
-        \STATE S' = AplicarPerturbacionAleatoria(S); Ec. \ref{eq:perturbation}
-        \STATE Dif = EvaluarDiferencia(S, S'); Ec. \ref{eq:evaluate} 
-        \STATE S = ActualizarSolucion(S, S', Dif); Ec.\ref{eq:other}
-        \STATE T = ActualizarTemperatura(T); Ec. \ref{eq:decreaseT}
-        \STATE S = BusquedaGlobalSA(); secc. Diap. \ref{sec:BG}
+        \STATE S' = AplicarPerturbacionAleatoria(S);
+        \STATE Dif = EvaluarDiferencia(S, S'); 
+        \STATE S = ActualizarSolucion(S, S', Dif);
+        \STATE T = ActualizarTemperatura(T);
+        \STATE S = BusquedaGlobalSA(); Diap. \ref{sec:BG}
     \ENDWHILE
     \RETURN Mejor solución obtenida
   \end{algorithmic}
