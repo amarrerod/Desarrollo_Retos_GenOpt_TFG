@@ -81,37 +81,6 @@ Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $
 \end{minipage}}
 \end{frame}
 
-\begin{frame}
-\frametitle{Búsqueda Global}
-\begin{block}{Centroide}
-El centroide de un conjunto de $k$ elementos, tal que $k = \left | S \right |$, se define como:
-\begin{equation}
-    C = \frac{x_{1} + x_{2} + ... + x_{k}}{k}
-\end{equation}
- \end{block}
-\begin{block}{}
-Cada elemento $x_{i}$ representa una solución factible a nuestro problema con $D$ variables.
- \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{Búsqueda Global}
-\begin{algorithm}[H]
-  \caption{Cálculo del centroide}
-  \label{pseu:centroide}
-  \begin{algorithmic}[1]
-    \FOR{$i \leftarrow 0 $ hasta $D$}
-      \STATE $Suma = 0$;
-      \FOR{$j \leftarrow 0$ hasta $\left | S \right |$}
-        \STATE $Suma = Suma + S[i][j];$
-      \ENDFOR
-      \STATE Centroide[i] = $\frac{Suma}{\left | S \right |}$;
-    \ENDFOR    
-    \RETURN Centroide
-  \end{algorithmic}
-\end{algorithm}
-\end{frame}
-
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \subsection{OBL Competitive Particle Swarm Optimization}
 
@@ -254,44 +223,9 @@ Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística que está 
   \item Perturbación.
   \item Evaluación.
   \item Actualizar Temperatura.
-  \item Búsqueda global para SA.
+  \item Búsqueda global para HSAGS.
 \end{itemize}
 \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{Búsqueda Global para HSAGS}
-\centering
-  \scalebox{0.6}{%
-  \begin{minipage}[b]{1.2\linewidth}
-  \begin{algorithm}[H]
-  \caption{BúsquedaGlobalSA(\mbox{})}
-  \label{pseu:bg}
-  \begin{algorithmic}[1]
-    \STATE Individuo = S[0];
-    \STATE NumeroMejora = 0;
-    \WHILE{$NumeroMejora > 0 $}
-      \STATE Mejora = true;
-      \WHILE{$Mejora = true$}
-        \WHILE{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}
-          \STATE GenerarRand(a1, a2, a3); 
-        \ENDWHILE
-        \STATE NuevoInd = ModificarIndividuo(Individuo, a1, a2, a3);
-        \IF{$NuevoInd < Individuo$}
-          \STATE $Mejora = true;$
-          \STATE $S = S \cap NuevoInd$;
-          \STATE NumeroMejora = NumeroMejora + 1;
-          \ELSE
-            \STATE Mejora = false;
-        \ENDIF
-      \ENDWHILE
-    \ENDWHILE
-    \STATE OrdenarPoblacion(S); 
-    \STATE S = ObtenerMejorIndividuo(S);
-    \RETURN Mejor individuo encontrado
-  \end{algorithmic}
-\end{algorithm}
-\end{minipage}}
 \end{frame}
 
 \begin{frame}
