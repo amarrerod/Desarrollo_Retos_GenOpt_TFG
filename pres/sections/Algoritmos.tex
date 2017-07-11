@@ -86,7 +86,7 @@ Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $
  
 \begin{frame}{\resizebox{\textwidth}{!}{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}}
 \begin{block}{Diseño}
-El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} incluye dos modificaciones:
+El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \citep{oblcpso} incluye dos modificaciones:
 \begin{itemize}
 	\item Opposition-based Learning.
 	\item Procedimiento de Competición.
@@ -94,8 +94,8 @@ El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (
 \end{block}
 
 \begin{block}{Competición}
-Escogemos, aleatoriamente, tres individuos los hacemos competir entre ellos mediante su valor de función objetivo. 
-Para una población de tamaño $N$, se realizarán un total de $N/3$ competiciones \cite{oblcpso}.
+Escogemos, aleatoriamente, tres individuos y los hacemos competir entre ellos mediante su valor de función objetivo. 
+Para una población de tamaño $N$, se realizarán un total de $N/3$ competiciones \citep{oblcpso}.
 \begin{itemize}
   \Fontvi
   \item Ganador (w).
@@ -183,10 +183,10 @@ Para una población de tamaño $N$, se realizarán un total de $N/3$ competicion
 
 \begin{frame}{\resizebox{\textwidth}{!}{Hybrid Simulated Annealing with Global Search (HSAGS)}}
 \begin{block}{Simulated Annealing (SA)}
-Simulated Annealing (SA) \cite{SA1, SA2, SA3} es una meta-heurística que está inspirada por el proceso de recocido en la metalurgia \cite{metabook}.
+Simulated Annealing (SA) \citep{SA1, SA2, SA3} es una meta-heurística que está inspirada por el proceso de recocido en la metalurgia \citep{metabook}.
 \begin{itemize}
   \item Iniciamos con un valor $T_{0}$ muy elevado.
-  \item Un único individuo en la población.
+  \item Algoritmo de trayectoria (una única solución, en lugar de una población).
 \end{itemize}
 \end{block}
 \begin{block}{Pasos del Algoritmo}
