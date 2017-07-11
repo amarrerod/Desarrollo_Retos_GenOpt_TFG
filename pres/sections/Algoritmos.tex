@@ -83,36 +83,8 @@ Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $
 
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \subsection{OBL Competitive Particle Swarm Optimization}
-
+ 
 \begin{frame}{\resizebox{\textwidth}{!}{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}}
-\centering
-  \scalebox{0.8}{%
-  \begin{minipage}[b]{1.2\linewidth}
-  \begin{algorithm}[H]
-  \caption{Particle Swarm Optimization(\mbox{})}
-  \label{pseu:pso}
-  \begin{algorithmic}[1]
-    \WHILE{Condición de parada no satisfecha}
-      \FORALL{$p_{i}$ en S}
-        \STATE Evaluar $ p_{i} $;
-        \STATE Actualizar mejor posición $pb_{i}$;
-        \STATE Actualizar mejor global $gb$;
-      \ENDFOR
-      \FORALL{$p_{i}$ en S}
-       \FORALL{$d_{i}$ en D}
-       \STATE $ v_{i,d} = v_{i,d} + C_{1} * Rnd(0,1) * [pb_{i,d} - x_{i,d}] + C_{2} + Rnd(0,1) * [gb_{d} - x_{i,d}] $;\\ Rnd(0,1) devuelve un número generado aleatoriamente en el rango [0, 1]
-            $ x_{i,d} = x_{i,d} + v_{i,d}$; \\
-       \ENDFOR
-      \ENDFOR
-    \ENDWHILE
-    \RETURN Mejor solución obtenida
-  \end{algorithmic}
-\end{algorithm}
-\end{minipage}}
-\end{frame}
-
-
-\begin{frame}{OBL-CPSO}
 \begin{block}{Diseño}
 El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \cite{oblcpso} incluye dos modificaciones:
 \begin{itemize}
@@ -122,13 +94,13 @@ El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (
 \end{block}
 
 \begin{block}{Competición}
-Escogemos, aleatoriamente, tres partículas dentro del enjambre y las hacemos competir entre ellas mediante su valor de función objetivo. 
-Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones \cite{oblcpso}.
+Escogemos, aleatoriamente, tres individuos los hacemos competir entre ellos mediante su valor de función objetivo. 
+Para una población de tamaño $N$, se realizarán un total de $N/3$ competiciones \cite{oblcpso}.
 \begin{itemize}
   \Fontvi
-  \item Ganadora (w).
-  \item Neutra (n).
-  \item Perdedora (l).
+  \item Ganador (w).
+  \item Neutro (n).
+  \item Perdedor (l).
 \end{itemize}
 \end{block}
 \end{frame}
@@ -171,8 +143,7 @@ Para un enjambre de tamaño $N$, se realizarán un total de $N/3$ competiciones 
 \begin{itemize}
 \item $\lambda$: tamaño de la población.
 \item C: la matriz de covarianza C de dimensión $\textrm{C}_{\lambda}^{D}$.
-\item $\sigma$: índice de variacón entre generaciones.
-\item $\mu$: individuos seleccionados en la selección elitista.
+\item $\sigma$: índice de variación entre generaciones.
 \item $m^{g} \in \Re^{D}$: Valor medio de la distribución en la generación \textit{g}
 \end{itemize}
  \end{block}
