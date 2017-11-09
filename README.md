@@ -1,4 +1,4 @@
-#TFG: Desarrollo dirigido por retos
+# TFG: Desarrollo de algoritmos dirigido por retos
 
 En este Trabajo de Fin de Grado, se propone el diseño y análisis de diversas técnicas
 algorítmicas para la resolución de problemas definidos en el ámbito de un concurso/competición
@@ -25,12 +25,3 @@ implementadas y la posibilidad de paralelizarlas de un modo relativamente sencil
 Por lo tanto, el principal objetivo del presente Trabajo de Fin de Grado es el diseño, desarrollo
 y análisis de la parametrización de diversos algoritmos evolutivos y otras técnicas metaheurísticas
 en el ámbito de una competición de optimización continua. 
-
-La estructura de este repositorio es la siguiente:
-
-      .
-      ├── bib          # Artículos relacionados con este Trabajo de Fin de Grado
-      ├── mem          # Modelo LaTeX de la memoria a presentar
-      ├── pres         # Modelo BEAMER de la presentación oral
-      ├── code         # Código fuente 
-      └── tareas       # Tareas del Aula Virtual de la asignatura
