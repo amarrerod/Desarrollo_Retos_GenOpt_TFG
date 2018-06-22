@@ -1,0 +1,8 @@
+postscript("boxplot_CMA_ES_16.eps", horizontal=FALSE, height=8, width=16, pointsize=14.9)
+data1<-scan("/home/marrero/Escritorio/Rendimiento/CMA/2_50/boxplots/boxplots_16.metric")
+data2<-scan("/home/marrero/Escritorio/Rendimiento/CMA/2_100/boxplots/boxplots_16.metric")
+data3<-scan("/home/marrero/Escritorio/Rendimiento/CMA/2_20/boxplots/boxplots_16.metric")
+dataM<-matrix(c(data1,data2,data3), 100)
+library("Rlab")
+bplot(dataM, space = 0.6, labels = c("CMA_ES-2-50", "CMA_ES-2-100", "CMA_ES-2-20"), ylab = "Objective value", main = expression("Function f"[16]*" - 10e6 evals. - 1 exec."))
+dev.off()

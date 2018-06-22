@@ -1,0 +1,224 @@
+
+\section{Algoritmos Desarrollados}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \centering
+  \includegraphics[width=0.15\textwidth]{img/ullesc.eps}
+  \begin{scriptsize}
+    \begin{center}
+    \Huge{Algoritmos Desarrollados}
+    \end{center}
+  \end{scriptsize}
+\end{frame}
+
+\subsection{Opposition-Based Learning}
+\begin{frame}
+\frametitle{Opposition-Based Learning}
+\begin{block}{Definición formal}
+Sea $x \in \Re $  un número real definido dentro de un cierto intervalo: $x \in [a,b]$. El número opuesto de x denotado como $\overline{x}$ se define de la siguiente forma:
+ \begin{equation}
+     \overline{x} = a + b - x 
+ \end{equation}
+ \end{block}
+ \begin{block}{Función D-Dimensional}
+Sea $ P(x_{1}, x_{2},...,x_{D}) $ un punto dentro de un sistema de coordenadas $D-dimensional$ con $ x_{1},...,x_{D} \in \Re$ y además $ x_{i} \in [a_{i}, b{i}]$. El opuesto del punto P se define como las coordenadas $\overline{x_{1}},...\overline{x_{D}}$ donde:
+\begin{equation}
+    \overline{x_{i}} = a_{i} + b_{i} - x_{i} \quad i = 1,...,D 
+\end{equation}
+ \end{block}
+\end{frame}
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+\begin{frame}
+\centering
+\frametitle{Búsqueda Global}
+  \scalebox{0.6}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Búsqueda global(\mbox{})}
+  \label{pseu:bg}
+  \begin{multicols}{2}
+  \begin{algorithmic}[1]
+    \STATE NumIndividuos = $\left | S \right |$;
+    \STATE OrdenarPoblacion(S);
+    \STATE MarcarNoExplorados(S);
+    \STATE Centroide = CalcularCentroide();
+    \STATE NumeroMejora = 0;
+    \STATE NumeroExplorado = 0;
+    \WHILE{$NumeroMejora > 0 $ y $NumeroExplorado < \left | S \right |$}
+      \STATE k = 0;
+      \WHILE{$S[k] = explorado $ y $NumeroExplorado < \left | S \right |$}
+        \STATE k = rand(0, $\left | S \right |$); (1)
+      \ENDWHILE
+      \STATE S[k] = explorado;
+      \STATE NumeroExplorado = NumeroExplorado + 1;
+      \STATE Mejora = true;
+      \WHILE{$Mejora = true$}
+        \WHILE{$|a_{1}| + |a_{2}| + |a_{3}| \neq 1$}
+          \STATE GenerarRand(a1, a2, a3); (2)
+        \ENDWHILE
+        \WHILE{$ r_{1} < k$}
+          \STATE $ r_{1}$ = rand(0, $\left | S \right |$); (2)
+        \ENDWHILE
+        \STATE NuevoInd = ModificarIndividuo(k, a1, a2, a3, Centroide, $r_{1}$);
+        \IF{$NuevoInd < S[k]$}
+          \STATE $Mejora = true;$
+          \STATE $S = S \cap NuevoInd$;
+          \STATE NumeroMejora = NumeroMejora + 1;
+          \ELSE
+            \STATE Mejora = false;
+        \ENDIF
+      \ENDWHILE
+    \ENDWHILE
+    \STATE OrdenarPoblacion(S); 
+    \STATE S = ObtenerMejores(0, NumIndividuos, S);
+    \RETURN $\left | S \right |$ mejores individuos encontrados
+  \end{algorithmic}
+  \end{multicols}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{OBL Competitive Particle Swarm Optimization}
+ 
+\begin{frame}{\resizebox{\textwidth}{!}{OBL Competitive Particle Swarm Optimization (OBL-CPSO)}}
+\begin{block}{Diseño}
+El algoritmo Opposition-based Learning Competitive Particle Swarm Optimization (OBL-CPSO) \citep{oblcpso} incluye dos modificaciones:
+\begin{itemize}
+	\item Opposition-based Learning.
+	\item Procedimiento de Competición.
+\end{itemize}
+\end{block}
+
+\begin{block}{Competición}
+Escogemos, aleatoriamente, tres individuos y los hacemos competir entre ellos mediante su valor de función objetivo. 
+Para una población de tamaño $N$, se realizarán un total de $N/3$ competiciones \citep{oblcpso}.
+\begin{itemize}
+  \Fontvi
+  \item Ganador (w).
+  \item Neutro (n).
+  \item Perdedor (l).
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{OBL-CPSO}
+\centering
+  \scalebox{0.8}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{OBL Competitive Particle Swarm Optimization(\mbox{})}
+  \label{pseu:oblcpso}
+  \begin{algorithmic}[1]
+    \STATE Inicializar();
+    \WHILE{Condición de parada no satisfecha}
+      \STATE Agitar();
+      \FORALL{$ k=1: N/3 $}
+        \STATE $ r_{1} = S(k)$;
+        \STATE $ r_{2} = S(k + N/3)$;
+        \STATE $ r_{3} = S(k + 2N/3)$;
+        \STATE $(w, n, l) = competir(r_{1}, r_{2}, r_{3})$;
+        \STATE Actualizar $ X^{k}_{ld}(t)$; 
+        \STATE Actualizar $ X^{k}_{nd}(t)$; 
+        \STATE Actualizar los valores de fitness para N y L;
+      \ENDFOR
+      \STATE BusquedaGlobal();
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Covariance Matrix Adaptation Evolutionary Strategy}
+
+\begin{frame}{\resizebox{\textwidth}{!}{Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES)}}
+\begin{block}{Parámetros}
+\begin{itemize}
+\item $\lambda$: tamaño de la población.
+\item C: la matriz de covarianza C de dimensión $\textrm{C}_{\lambda}^{D}$.
+\item $\sigma$: índice de variación entre generaciones.
+\item $m^{g} \in \Re^{D}$: Valor medio de la distribución en la generación \textit{g}
+\end{itemize}
+ \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{CMA-ES}
+\centering
+  \scalebox{0.6}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Covariance Matrix Adaptation Evolutionary Strategy (\mbox{})}
+  \label{pseu:cmaes}
+  \begin{algorithmic}[1]
+    \REQUIRE \[ m\in R^{n}, \sigma\in R_{+}, \lambda\]
+    \STATE Inicialización 
+    \[C = I, p_{c} = 0, p_{\sigma} = 0\]
+    \[ c_{c}\approx 4/n, c_{\sigma}\approx 4/n, c_{1}\approx 2/n^2, c_{\mu}\approx \mu_{w}/n^2, c_{1} + c_{\mu}\leq 1\]
+    \[ d_{\sigma}\approx 1+\sqrt{\frac{\mu_{w}}{n}}, 
+    w_{i}=1...\lambda \quad tal\quad que \quad \mu_{w} = \frac{1}{\sum_{i=1}^{\mu}w_{i}^2}\approx 0.3\lambda\]
+    \WHILE{Condición de parada no satisfecha}
+      \STATE Muestreo 
+      \STATE Actualizar el valor medio
+      \STATE Actualizar C
+      \STATE Actualizar $\sigma$ 
+      \STATE BusquedaGlobal(); 
+      \IF{Reinicio necesario} \STATE {Reiniciar();} \ENDIF
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Hybrid Simulated Annealing with Global Search}
+
+\begin{frame}{\resizebox{\textwidth}{!}{Hybrid Simulated Annealing with Global Search (HSAGS)}}
+\begin{block}{Simulated Annealing (SA)}
+Simulated Annealing (SA) \citep{SA1, SA2, SA3} es una meta-heurística que está inspirada por el proceso de recocido en la metalurgia \citep{metabook}.
+\begin{itemize}
+  \item Iniciamos con un valor $T_{0}$ muy elevado.
+  \item Algoritmo de trayectoria (una única solución, en lugar de una población).
+\end{itemize}
+\end{block}
+\begin{block}{Pasos del Algoritmo}
+\begin{itemize}
+  \item Perturbación.
+  \item Evaluación.
+  \item Actualizar Temperatura.
+  \item Búsqueda global para HSAGS.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{HSAGS}
+\centering
+  \scalebox{0.9}{%
+  \begin{minipage}[b]{1.2\linewidth}
+  \begin{algorithm}[H]
+  \caption{Hybrid Simulated Annealing with Global Search(\mbox{})}
+  \label{pseu:sa}
+  \begin{algorithmic}[1]
+    \STATE S = GenerarSolucionAleatoria();
+    \STATE T = InicializarTemperatura(); 
+    \WHILE{Condición de parada no satisfecha}
+        \STATE S' = AplicarPerturbacionAleatoria(S);
+        \STATE Dif = EvaluarDiferencia(S, S'); 
+        \STATE S = ActualizarSolucion(S, S', Dif);
+        \STATE T = ActualizarTemperatura(T);
+        \STATE S = BusquedaGlobalSA(); 
+    \ENDWHILE
+    \RETURN Mejor solución obtenida
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}}
+\end{frame}

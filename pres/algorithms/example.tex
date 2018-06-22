@@ -1,0 +1,22 @@
+\begin{algorithm}[!t]
+  \caption{Pseudocode of Migrating Birds Optimisation (\mbox{})}
+  \label{pseu:mbo_orig}
+  \begin{algorithmic}[1]
+    \REQUIRE $n$, $K$, $m$, $k$, and $x$
+    \STATE Generate $n$ initial individuals at random and arbitrarily place them on a hypothetical V-formation
+    \STATE $g = n$
+    \WHILE{$(g < K)$}
+      \FOR{($j = 1:m$)}
+        \STATE Try to improve the leader individual through the generation of $k$ neighbours starting from it
+        \STATE $g = g + k$
+        \FORALL{(follower individual $s$ in the population)}
+          \STATE Try to improve $s$ through the generation of $k - x$ neighbours starting from it, and the best
+                 unused $x$ neighbours of its immediate predecessor attending to the current V-formation
+          \STATE $g = g + (k - x)$
+        \ENDFOR
+      \ENDFOR
+      \STATE Move the leader to the end of the V-formation and forward one of its immediate followers as the leader
+    \ENDWHILE
+    \RETURN the best individual in the population
+  \end{algorithmic}
+\end{algorithm}
